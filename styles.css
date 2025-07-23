@@ -746,135 +746,31 @@ body {
 
     .hero-container {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 20px;
         text-align: center;
+        padding: 20px 15px;
     }
 
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 20px;
     }
 
     .hero-buttons {
         flex-direction: column;
         align-items: center;
+        gap: 15px;
     }
 
     .app-showcase {
-        gap: 15px;
+        gap: 20px;
         width: 100%;
-    }
-
-    .phone-frame {
-        width: 320px;
-        height: 640px;
-        margin: 0 auto;
-    }
-
-    .notch {
-        width: 110px;
-        height: 22px;
-    }
-
-    .app-screens {
-        gap: 15px;
-        padding: 15px;
-        margin-top: 25px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .screen-preview {
-        min-width: 80px;
-        padding: 12px 10px;
-    }
-
-    .preview-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-    }
-
-    .screen-preview span {
-        font-size: 12px;
-    }
-
-    .pain-grid,
-    .features-grid,
-    .why-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .form-group {
-        flex-direction: column;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .social-links {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-
-    .hero-content p {
-        font-size: 1rem;
-    }
-
-    .app-showcase {
-        gap: 10px;
-    }
-
-    .phone-frame {
-        width: 300px;
-        height: 600px;
-        margin: 0 auto;
-    }
-
-    .notch {
-        width: 100px;
-        height: 20px;
-    }
-
-    .app-screens {
-        gap: 12px;
-        padding: 12px;
         margin-top: 20px;
-    }
-
-    .screen-preview {
-        min-width: 70px;
-        padding: 10px 8px;
-    }
-
-    .preview-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 18px;
-    }
-
-    .screen-preview span {
-        font-size: 11px;
-    }
-}
-
-@media (max-width: 375px) {
-    .hero-content h1 {
-        font-size: 1.8rem;
-    }
-
-    .hero-content p {
-        font-size: 0.95rem;
-    }
-
-    .app-showcase {
-        gap: 8px;
     }
 
     .phone-frame {
@@ -884,18 +780,22 @@ body {
     }
 
     .notch {
-        width: 90px;
-        height: 18px;
+        width: 100px;
+        height: 20px;
     }
 
     .app-screens {
         gap: 10px;
         padding: 10px;
         margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
     }
 
     .screen-preview {
-        min-width: 65px;
+        min-width: 60px;
         padding: 8px 6px;
     }
 
@@ -907,5 +807,179 @@ body {
 
     .screen-preview span {
         font-size: 10px;
+    }
+
+    .pain-grid,
+    .features-grid,
+    .why-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .pain-points,
+    .features,
+    .why-pawcket,
+    .faq,
+    .cta-section {
+        padding: 40px 20px;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-container {
+        padding: 15px 10px;
+        gap: 15px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+
+    .hero-buttons {
+        gap: 12px;
+    }
+
+    .app-showcase {
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .phone-frame {
+        width: 260px;
+        height: 520px;
+        margin: 0 auto;
+    }
+
+    .notch {
+        width: 90px;
+        height: 18px;
+    }
+
+    .app-screens {
+        gap: 8px;
+        padding: 8px;
+        margin-top: 12px;
+    }
+
+    .screen-preview {
+        min-width: 55px;
+        padding: 6px 4px;
+    }
+
+    .preview-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+    .screen-preview span {
+        font-size: 9px;
+    }
+
+    .pain-points,
+    .features,
+    .why-pawcket,
+    .faq,
+    .cta-section {
+        padding: 30px 15px;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 375px) {
+    .hero-container {
+        padding: 10px 8px;
+        gap: 12px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+
+    .hero-buttons {
+        gap: 10px;
+    }
+
+    .app-showcase {
+        gap: 12px;
+        margin-top: 12px;
+    }
+
+    .phone-frame {
+        width: 240px;
+        height: 480px;
+        margin: 0 auto;
+    }
+
+    .notch {
+        width: 80px;
+        height: 16px;
+    }
+
+    .app-screens {
+        gap: 6px;
+        padding: 6px;
+        margin-top: 10px;
+    }
+
+    .screen-preview {
+        min-width: 50px;
+        padding: 5px 3px;
+    }
+
+    .preview-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .screen-preview span {
+        font-size: 8px;
+    }
+
+    .pain-points,
+    .features,
+    .why-pawcket,
+    .faq,
+    .cta-section {
+        padding: 25px 10px;
+    }
+
+    .container {
+        padding: 0 8px;
     }
 } 
