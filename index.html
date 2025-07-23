@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcket - Your Pet's Best Friend</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-paw"></i>
+                <span>Pawcket</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#waitlist" class="cta-button">Join Waitlist</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Your Pet's Health, <span class="highlight">Simplified</span></h1>
+                <p>Never miss a vaccine, medication, or grooming appointment again. Pawcket keeps your furry friend healthy and happy with smart reminders and a vibrant pet community.</p>
+                <div class="hero-buttons">
+                    <button class="primary-btn" onclick="scrollToWaitlist()">
+                        <i class="fas fa-rocket"></i>
+                        Get Early Access
+                    </button>
+                    <button class="secondary-btn" onclick="scrollToFeatures()">
+                        <i class="fas fa-play"></i>
+                        See How It Works
+                    </button>
+                </div>
+
+            </div>
+            <div class="hero-visual">
+                <div class="app-showcase">
+                    <div class="phone-frame">
+                        <div class="notch"></div>
+                        <iframe src="pawcket/home.html" frameborder="0"></iframe>
+                    </div>
+                    <div class="app-screens">
+                        <div class="screen-preview active" data-screen="pawcket/home.html">
+                            <div class="preview-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <span>Home</span>
+                        </div>
+                        <div class="screen-preview" data-screen="pawcket/social.html">
+                            <div class="preview-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span>Social</span>
+                        </div>
+                        <div class="screen-preview" data-screen="pawcket/virtual_pet.html">
+                            <div class="preview-icon">
+                                <i class="fas fa-paw"></i>
+                            </div>
+                            <span>Virtual Pet</span>
+                        </div>
+                        <div class="screen-preview" data-screen="pawcket/match.html">
+                            <div class="preview-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <span>Match</span>
+                        </div>
+                        <div class="screen-preview" data-screen="pawcket/chat.html">
+                            <div class="preview-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <span>Chat</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Points Section -->
+    <section class="pain-points">
+        <div class="container">
+            <h2>We Know Your Struggles</h2>
+            <div class="pain-grid">
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-calendar-times"></i>
+                    </div>
+                    <h3>Missed Appointments</h3>
+                    <p>Forgetting vaccines, medications, and grooming sessions</p>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <h3>Scattered Records</h3>
+                    <p>Health information spread across multiple vet offices</p>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>Lonely Pets</h3>
+                    <p>Hard to find playmates and social opportunities</p>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>No Support Network</h3>
+                    <p>Lack of community for pet care advice and tips</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Everything Your Pet Needs</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Health Records</h3>
+                    <p>Centralized medical history, vaccine schedules, and medication tracking</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Smart Reminders</h3>
+                    <p>Customizable alerts for vaccines, medications, grooming, and more</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Virtual Pet Profile</h3>
+                    <p>Create adorable digital avatars that reflect your pet's personality</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Pet Community</h3>
+                    <p>Share moments, ask questions, and connect with fellow pet parents</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Pet Matching</h3>
+                    <p>Find compatible playmates based on personality and location</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Smart Integration</h3>
+                    <p>Connect with pet wearables for real-time health monitoring</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Why Pawcket Section -->
+    <section class="why-pawcket">
+        <div class="container">
+            <h2>Why Choose Pawcket?</h2>
+            <div class="why-grid">
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Privacy First</h3>
+                    <p>Your pet's data is encrypted and secure</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>AI-Powered</h3>
+                    <p>Smart recommendations based on your pet's needs</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Community</h3>
+                    <p>Connect with pet parents worldwide</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Expert help whenever you need it</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is Pawcket free to use?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pawcket offers a free tier with basic features. Premium features are available with a subscription for advanced health tracking and community features.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How does pet matching work?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our AI analyzes your pet's breed, age, personality, and location to suggest compatible playmates. You can review and connect with other pet parents.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I connect with my vet?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Pawcket allows you to share health records directly with your veterinarian and receive appointment reminders.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>When will the app be available?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We're launching in Q4 2025! Join our waitlist to get early access and exclusive updates.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="waitlist" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Be Among the First to Experience Pawcket</h2>
+                <p>Join our exclusive waitlist to get early access, exclusive updates, and special launch pricing when we go live.</p>
+                <form class="waitlist-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit" class="primary-btn">
+                            <i class="fas fa-rocket"></i>
+                            Join Waitlist
+                        </button>
+                    </div>
+                </form>
+                <p class="form-note">No spam, ever. Unsubscribe at any time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-paw"></i>
+                        <span>Pawcket</span>
+                    </div>
+                    <p>Your pet's health and happiness, simplified.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#waitlist">Join Waitlist</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Pawcket. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

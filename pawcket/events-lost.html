@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcket - Lost Pets</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100%;
+            position: relative;
+            background-color: #f5f5f7;
+        }
+        .post-title {
+            font-weight: 500;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            color: #111827;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .user-name {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #4B5563;
+        }
+        .like-count {
+            font-size: 0.75rem;
+            color: #6B7280;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        .event-date {
+            font-size: 0.75rem;
+            color: #6B7280;
+        }
+        .event-tag {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 9999px;
+            font-weight: 500;
+        }
+        .tag-lost {
+            background-color: #FEE2E2;
+            color: #B91C1C;
+        }
+        
+        /* Fix for bottom white space */
+        .space-y-4 {
+            min-height: calc(100vh - 220px); /* Accounts for header, tabs, filters, and tab bar */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Header -->
+        <div class="flex-between mb-6">
+            <div class="flex items-center h-10">
+                <h1 class="header-title">Social</h1>
+            </div>
+            <div class="flex items-center">
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-2">
+                    <i class="fas fa-search text-gray-500"></i>
+                </button>
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-bell text-gray-500"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex bg-gray-100 rounded-lg p-1 mb-4">
+            <a href="social.html" class="flex-1">
+                <button class="flex-1 py-2 text-gray-500 text-sm font-medium w-full">Activity</button>
+            </a>
+            <a href="nearby.html" class="flex-1">
+                <button class="flex-1 py-2 text-gray-500 text-sm font-medium w-full">Nearby</button>
+            </a>
+            <button class="flex-1 py-2 rounded-lg bg-white shadow text-sm font-medium">Events</button>
+        </div>
+
+        <!-- Event Filters -->
+        <div class="flex space-x-2 mb-4 overflow-x-auto py-1">
+            <a href="events.html" class="inline-block">
+                <button class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
+                    All Events
+                </button>
+            </a>
+            <a href="events-meetups.html" class="inline-block">
+                <button class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
+                    <i class="fas fa-users text-blue-600 mr-1"></i> Meetups
+                </button>
+            </a>
+            <a href="events-lost.html" class="inline-block">
+                <button class="px-3 py-1 bg-purple-500 text-white text-xs font-medium rounded-full whitespace-nowrap">
+                    <i class="fas fa-search text-white mr-1"></i> Lost Pets
+                </button>
+            </a>
+            <a href="events-adoption.html" class="inline-block">
+                <button class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
+                    <i class="fas fa-home text-green-600 mr-1"></i> Adoption
+                </button>
+            </a>
+            <a href="events-training.html" class="inline-block">
+                <button class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
+                    <i class="fas fa-graduation-cap text-yellow-600 mr-1"></i> Training
+                </button>
+            </a>
+        </div>
+
+        <!-- Events List -->
+        <div class="space-y-4 mb-6">
+            <!-- Event 1 - Lost Cat -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-lost">Lost Pet</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">MISSING: Bella, Brown Tabby Cat</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Missing since June 10, 2023</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Oliver District, Edmonton</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Our cat Bella went missing from the Oliver District area. She is a brown tabby with white paws and a white chest. Very friendly, wearing a blue collar with ID tag. Please contact if you see her!
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Emily Wilson</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Contact
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 2 - Lost Dog -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/58997/pexels-photo-58997.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-lost">Lost Pet</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">MISSING: Max, Beagle Mix</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Missing since June 12, 2023</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Bonnie Doon, Edmonton</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Max, our 3-year-old beagle mix, ran off during a walk near Bonnie Doon Mall. He's brown and white, medium-sized, and wearing a red collar with tags. He's microchipped and very friendly. Please call if spotted!
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Thomas Zhang</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Contact
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 3 - Lost Parrot -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/56733/pexels-photo-56733.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-lost">Lost Pet</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">MISSING: Kiwi, Green Budgie</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Missing since June 14, 2023</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Strathcona, Edmonton</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Our pet budgie Kiwi flew out an open window in the Strathcona area. He's bright green with yellow head markings and has a blue identification band on his leg. He responds to his name and whistling. Please contact us with any sightings!
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Jessica Taylor</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Contact
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 4 - Lost Rabbit -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/4001296/pexels-photo-4001296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-lost">Lost Pet</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">MISSING: Snowball, White Bunny</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Missing since June 8, 2023</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Westmount, Edmonton</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Our pet rabbit Snowball escaped from his outdoor enclosure in the Westmount neighborhood. He's a medium-sized white bunny with pink eyes. He's very timid but may come if offered carrots or lettuce. Please call if you see him!
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Sarah Lee</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Contact
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Action Button -->
+        <div class="fixed bottom-28 right-4">
+            <button class="w-14 h-14 bg-purple-500 rounded-full shadow-lg flex items-center justify-center">
+                <i class="fas fa-plus text-white text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="virtual_pet.html" class="tab-item">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>Virtual Pet</span>
+        </a>
+        <a href="social.html" class="tab-item active">
+            <i class="fas fa-camera tab-icon"></i>
+            <span>Social</span>
+        </a>
+        <a href="chat.html" class="tab-item">
+            <i class="fas fa-comment tab-icon"></i>
+            <span>Chat</span>
+        </a>
+        <a href="user_profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html> 

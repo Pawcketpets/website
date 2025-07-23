@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcket - Likes</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .notification-item {
+            display: flex;
+            padding: 14px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            align-items: center;
+        }
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        .notification-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 22.5px;
+            object-fit: cover;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .notification-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .notification-title {
+            font-size: 14px;
+            color: #111827;
+            margin-bottom: 2px;
+        }
+        .notification-date {
+            font-size: 12px;
+            color: #9CA3AF;
+            margin-left: 8px;
+            white-space: nowrap;
+        }
+        .red-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+            margin-left: 8px;
+        }
+        .content {
+            padding: 8px 16px;
+            padding-bottom: 103px; /* Space for tab bar */
+            min-height: calc(100vh - 44px); /* Full viewport height minus status bar */
+            overflow-y: auto;
+            position: relative;
+            box-sizing: border-box;
+        }
+        .title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        .notification-container {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Header -->
+        <div class="flex-between mb-4">
+            <div class="flex items-center">
+                <a href="chat.html" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-arrow-left text-gray-500"></i>
+                </a>
+                <h1 class="title">Likes</h1>
+            </div>
+        </div>
+
+        <!-- Likes Notifications -->
+        <div class="notification-container">
+            <div class="notification-item">
+                <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150" class="notification-avatar">
+                <div class="notification-content">
+                    <div class="notification-title">Sarah Lee liked your photo of Buddy at the park</div>
+                </div>
+                <div class="notification-date">2h</div>
+                <div class="red-dot"></div>
+            </div>
+
+            <div class="notification-item">
+                <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150" class="notification-avatar">
+                <div class="notification-content">
+                    <div class="notification-title">Emily Wilson saved your post about dog-friendly hikes</div>
+                </div>
+                <div class="notification-date">5h</div>
+            </div>
+
+            <div class="notification-item">
+                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=150" class="notification-avatar">
+                <div class="notification-content">
+                    <div class="notification-title">David Chen and 5 others liked your photo</div>
+                </div>
+                <div class="notification-date">1d</div>
+            </div>
+            
+            <div class="notification-item">
+                <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150" class="notification-avatar">
+                <div class="notification-content">
+                    <div class="notification-title">Ryan Johnson liked your comment on "Best dog training tips"</div>
+                </div>
+                <div class="notification-date">1d</div>
+            </div>
+            
+            <div class="notification-item">
+                <img src="https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&w=150" class="notification-avatar">
+                <div class="notification-content">
+                    <div class="notification-title">Jessica Rodriguez and 12 others liked your video of Buddy playing fetch</div>
+                </div>
+                <div class="notification-date">2d</div>
+                <div class="red-dot"></div>
+            </div>
+            
+            <div class="notification-item">
+                <img src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=150" class="notification-avatar">
+                <div class="notification-content">
+                    <div class="notification-title">Emma Taylor saved your post about homemade dog treats</div>
+                </div>
+                <div class="notification-date">3d</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="virtual_pet.html" class="tab-item">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>Virtual Pet</span>
+        </a>
+        <a href="social.html" class="tab-item">
+            <i class="fas fa-camera tab-icon"></i>
+            <span>Social</span>
+        </a>
+        <a href="chat.html" class="tab-item active">
+            <i class="fas fa-comment tab-icon"></i>
+            <span>Chat</span>
+        </a>
+        <a href="user_profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html> 

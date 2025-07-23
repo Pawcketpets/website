@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcket - Adoption Events</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100%;
+            position: relative;
+            background-color: #f5f5f7;
+        }
+        .post-title {
+            font-weight: 500;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            color: #111827;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .user-name {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #4B5563;
+        }
+        .like-count {
+            font-size: 0.75rem;
+            color: #6B7280;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        .event-date {
+            font-size: 0.75rem;
+            color: #6B7280;
+        }
+        .event-tag {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 9999px;
+            font-weight: 500;
+        }
+        .tag-adoption {
+            background-color: #D1FAE5;
+            color: #065F46;
+        }
+        
+        /* Fix for bottom white space */
+        .space-y-4 {
+            min-height: calc(100vh - 220px); /* Accounts for header, tabs, filters, and tab bar */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Header -->
+        <div class="flex-between mb-6">
+            <div class="flex items-center h-10">
+                <h1 class="header-title">Social</h1>
+            </div>
+            <div class="flex items-center">
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-2">
+                    <i class="fas fa-search text-gray-500"></i>
+                </button>
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-bell text-gray-500"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex bg-gray-100 rounded-lg p-1 mb-4">
+            <a href="social.html" class="flex-1">
+                <button class="flex-1 py-2 text-gray-500 text-sm font-medium w-full">Activity</button>
+            </a>
+            <a href="nearby.html" class="flex-1">
+                <button class="flex-1 py-2 text-gray-500 text-sm font-medium w-full">Nearby</button>
+            </a>
+            <button class="flex-1 py-2 rounded-lg bg-white shadow text-sm font-medium">Events</button>
+        </div>
+
+        <!-- Event Filters -->
+        <div class="flex space-x-2 mb-4 overflow-x-auto py-1">
+            <a href="events.html" class="inline-block">
+                <button class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
+                    All Events
+                </button>
+            </a>
+            <a href="events-meetups.html" class="inline-block">
+                <button class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
+                    <i class="fas fa-users text-blue-600 mr-1"></i> Meetups
+                </button>
+            </a>
+            <a href="events-lost.html" class="inline-block">
+                <button class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
+                    <i class="fas fa-search text-red-600 mr-1"></i> Lost Pets
+                </button>
+            </a>
+            <a href="events-adoption.html" class="inline-block">
+                <button class="px-3 py-1 bg-purple-500 text-white text-xs font-medium rounded-full whitespace-nowrap">
+                    <i class="fas fa-home text-white mr-1"></i> Adoption
+                </button>
+            </a>
+            <a href="events-training.html" class="inline-block">
+                <button class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
+                    <i class="fas fa-graduation-cap text-yellow-600 mr-1"></i> Training
+                </button>
+            </a>
+        </div>
+
+        <!-- Events List -->
+        <div class="space-y-4 mb-6">
+            <!-- Event 1 - Puppies Adoption -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-adoption">Adoption</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">Puppies Looking for Forever Homes</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Available from June 20, 2023</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Edmonton Humane Society, West Edmonton</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Six adorable rescue puppies (mixed breed) looking for loving homes. They've been vet-checked, vaccinated, and microchipped. Please inquire if you'd like to meet them and potentially adopt!
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Edmonton Humane Society</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Inquire
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 2 - Cat Adoption Day -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/45170/kittens-cat-cat-puppy-rush-45170.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-adoption">Adoption</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">Special Cat Adoption Weekend</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">June 24-25, 2023 • 10:00 AM - 4:00 PM</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">SCARS Rescue, North Edmonton</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        We have over 20 cats and kittens looking for their forever homes! Adoption fees reduced for this special weekend event. All cats are spayed/neutered, vaccinated, and microchipped. Come meet your new feline friend!
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">SCARS Animal Rescue</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Attend
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 3 - Senior Dogs -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/33053/dog-young-dog-small-dog-maltese.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-adoption">Adoption</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">Senior Dog Adoption Drive</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">June 18, 2023 • 11:00 AM - 3:00 PM</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Old Strathcona Farmers Market, Edmonton</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Give a loving home to a senior dog! These sweet older dogs still have lots of love to give. Adoption fees waived for dogs 7+ years old. All dogs are fully vaccinated and health-checked. Join us at our special adoption event!
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Second Chance Animal Rescue</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Attend
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 4 - Exotic Pets -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/3135120/pexels-photo-3135120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-adoption">Adoption</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">Small & Exotic Pet Adoption Fair</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">June 30, 2023 • 12:00 PM - 5:00 PM</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">West Edmonton Mall, Community Room</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Looking for a rabbit, guinea pig, hamster, or other small pet? Our adoption fair features a variety of small and exotic pets in need of homes. Educational sessions on proper care will be provided throughout the day. Come meet these special creatures!
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Little Paws Rescue</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Attend
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Action Button -->
+        <div class="fixed bottom-28 right-4">
+            <button class="w-14 h-14 bg-purple-500 rounded-full shadow-lg flex items-center justify-center">
+                <i class="fas fa-plus text-white text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="virtual_pet.html" class="tab-item">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>Virtual Pet</span>
+        </a>
+        <a href="social.html" class="tab-item active">
+            <i class="fas fa-camera tab-icon"></i>
+            <span>Social</span>
+        </a>
+        <a href="chat.html" class="tab-item">
+            <i class="fas fa-comment tab-icon"></i>
+            <span>Chat</span>
+        </a>
+        <a href="user_profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html> 

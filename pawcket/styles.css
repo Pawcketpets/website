@@ -1,0 +1,1045 @@
+/* Common styles for PetPaw app */
+
+/* Global styles to fix scrolling issues */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #f5f5f7;
+}
+
+/* Status bar styling */
+.status-bar {
+    height: 44px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Tab bar styling */
+.tab-bar {
+    height: 83px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #f0f0f0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 20px; /* For iPhone home indicator */
+    z-index: 1000; /* Ensure tab bar stays on top */
+}
+
+.tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #8e8e93;
+    font-size: 10px;
+    width: 60px;
+}
+
+.tab-item.active {
+    color: #ff6b6b;
+}
+
+.tab-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+/* Content area */
+.content {
+    padding: 16px;
+    padding-bottom: 103px; /* Space for tab bar */
+    min-height: calc(100vh - 44px); /* Full viewport height minus status bar */
+    overflow-y: auto;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Card styling */
+.card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+/* Pet avatar */
+.pet-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    object-fit: cover;
+}
+
+.pet-avatar-large {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    object-fit: cover;
+}
+
+/* Button styling */
+.primary-button {
+    background-color: #ff6b6b;
+    color: white;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.secondary-button {
+    background-color: #f2f2f7;
+    color: #000;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Typography */
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.subtitle {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* Health status indicators */
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    margin-right: 8px;
+}
+
+.status-good {
+    background-color: #34c759;
+}
+
+.status-warning {
+    background-color: #ff9500;
+}
+
+.status-alert {
+    background-color: #ff3b30;
+}
+
+/* Custom colors */
+.pet-primary {
+    color: #ff6b6b;
+}
+
+.pet-secondary {
+    color: #5ac8fa;
+}
+
+.pet-tertiary {
+    color: #5e5ce6;
+}
+
+/* Utility classes */
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-start {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Badge */
+.badge {
+    background-color: #ff6b6b;
+    color: white;
+    border-radius: 10px;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Fix for text overflow issues */
+
+/* General text overflow handling */
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+/* Fix for temperament text in profile page */
+.bg-gray-50 p.text-sm {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+/* Fix for email text in settings page */
+.card .flex-start div p.text-gray-500 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 180px; /* Default max width */
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 375px) {
+    .card .flex-start div p.text-gray-500 {
+        font-size: 12px;
+        max-width: 140px;
+    }
+    
+    .card .flex-start div h2 {
+        font-size: 16px;
+    }
+    
+    .bg-gray-50 p.text-sm {
+        font-size: 11px;
+    }
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 320px) {
+    .card .flex-start div p.text-gray-500 {
+        max-width: 120px;
+        font-size: 11px;
+    }
+    
+    .card .flex-start div h2 {
+        font-size: 14px;
+    }
+}
+
+/* Pet info tags styling - OPTIMIZED */
+.pet-info-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px; /* 增加间距，更均匀 */
+    margin-top: 6px; /* 增加上边距，视觉更平衡 */
+    max-width: 100%;
+}
+
+.pet-info-tag {
+    padding: 4px 8px; /* 增加内边距，提高可读性 */
+    border-radius: 8px; /* 增大圆角，符合iOS/Android设计规范 */
+    font-size: 11px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px; /* 增加图标和文字间距 */
+    line-height: 1;
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* 轻微阴影增加层次感 */
+    transition: all 0.2s ease; /* 平滑过渡效果 */
+}
+
+/* 为不同类型的标签设置不同背景色 - 调整为更柔和的色调 */
+.pet-info-tag.breed {
+    background-color: #ECEFF1; /* 低饱和度灰色背景 */
+    color: #546E7A; /* 深灰色文字 */
+}
+
+.pet-info-tag.age {
+    background-color: #FFF8E1; /* 低饱和度黄色背景 */
+    color: #FFA000; /* 柔和的橙黄色文字 */
+}
+
+.pet-info-tag.gender.male {
+    background-color: #E3F2FD; /* 浅蓝色背景 */
+    color: #4A90E2; /* 蓝色文字 - 符合要求 */
+}
+
+.pet-info-tag.gender.female {
+    background-color: #FCE4EC; /* 浅粉色背景 */
+    color: #FF4081; /* 粉色文字 - 符合要求 */
+}
+
+.pet-info-tag i {
+    font-size: 10px; /* 增大图标尺寸，提高可见性 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    height: 10px; /* 固定高度确保对齐 */
+    width: 12px; /* 固定宽度确保对齐 */
+    margin-top: -1px; /* 微调垂直对齐 */
+}
+
+/* 标签悬停效果 - 增强交互体验 */
+.pet-info-tag:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments for pet info */
+@media (max-width: 375px) {
+    .pet-info-tags {
+        gap: 4px; /* 小屏幕减小间距 */
+    }
+    
+    .pet-info-tag {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+}
+
+@media (max-width: 320px) {
+    .pet-info-tags {
+        gap: 3px; /* 更小屏幕进一步减小间距 */
+    }
+    
+    .pet-info-tag {
+        font-size: 9px;
+        padding: 2px 5px;
+        border-radius: 6px; /* 小屏幕减小圆角 */
+    }
+    
+    .pet-info-tag i {
+        font-size: 9px;
+        margin-right: -1px; /* 微调小屏幕对齐 */
+    }
+}
+
+/* Pet Profile Page Optimizations */
+
+/* Diet Information Optimization */
+.diet-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background-color: #f9f9fb;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.diet-item:hover {
+    background-color: #f2f2f7;
+}
+
+.diet-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.diet-food-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.diet-food-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.diet-food-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.3;
+}
+
+.diet-food-brand {
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+}
+
+.diet-quantity {
+    font-weight: 600;
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+    padding: 4px 8px;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Allergies & Restrictions Optimization */
+.allergies-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.allergy-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    gap: 4px;
+}
+
+.allergy-tag.severe {
+    background-color: #FFEBEE;
+    color: #E53935;
+}
+
+.allergy-tag.moderate {
+    background-color: #FFF8E1;
+    color: #F57F17;
+}
+
+.allergy-tag i {
+    font-size: 10px;
+}
+
+/* Behavior & Training Optimization - REFINED */
+.behavior-card {
+    background-color: #f8f9fa;
+    padding: 12px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    height: 100%;
+    border: 1px solid rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    min-height: 100px; /* 确保最小高度一致 */
+}
+
+.behavior-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+.behavior-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 8px;
+}
+
+.behavior-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+/* 统一图标大小 */
+.behavior-icon i {
+    font-size: 14px; /* 统一图标大小 */
+    line-height: 1;
+}
+
+.behavior-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.3;
+}
+
+/* 确保内容区域高度一致且对齐 */
+.behavior-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-start; /* 确保内容从顶部开始 */
+    margin-left: 36px; /* 统一左侧缩进 */
+}
+
+.behavior-content {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+    text-align: left; /* 确保文本左对齐 */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 限制最多显示2行 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px; /* 与描述保持一致间距 */
+    width: 100%; /* 确保宽度一致 */
+    height: 3em; /* 固定高度为2行，确保一致性 */
+}
+
+/* 添加描述文本样式 */
+.behavior-description {
+    font-size: 11px;
+    color: #777;
+    font-style: italic;
+    line-height: 1.3;
+    text-align: left; /* 确保文本左对齐 */
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* 限制最多显示1行 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%; /* 确保宽度一致 */
+}
+
+/* Special Notes Optimization - REFINED */
+.special-notes {
+    background-color: #FFF3C4; /* 加深背景色，提高可读性 */
+    padding: 14px;
+    border-radius: 12px;
+    border-left: 3px solid #FFA000; /* 加深边框色 */
+    min-height: auto;
+}
+
+.special-notes .behavior-icon {
+    color: #F57C00; /* 加深图标颜色 */
+    background-color: #FFFDE7;
+}
+
+.special-notes .behavior-title {
+    color: #F57C00; /* 加深标题颜色 */
+}
+
+.special-notes .behavior-content {
+    color: #5D4037;
+    -webkit-line-clamp: unset; /* 特殊笔记不限制行数 */
+    height: auto; /* 特殊笔记高度自适应 */
+    margin-bottom: 0; /* 特殊笔记无描述，不需要底部间距 */
+}
+
+/* Responsive adjustments */
+@media (max-width: 375px) {
+    .behavior-card {
+        padding: 10px;
+        min-height: 90px;
+    }
+    
+    .behavior-content-wrapper {
+        margin-left: 32px;
+    }
+    
+    .behavior-content {
+        font-size: 12px;
+        height: 3.2em; /* 小屏幕调整高度 */
+    }
+    
+    .behavior-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .behavior-icon i {
+        font-size: 12px; /* 小屏幕上统一图标大小 */
+    }
+    
+    .behavior-description {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    .behavior-card {
+        min-height: 80px;
+    }
+    
+    .behavior-content-wrapper {
+        margin-left: 28px;
+    }
+    
+    .behavior-content {
+        font-size: 11px;
+        height: 3.3em; /* 更小屏幕调整高度 */
+    }
+    
+    .behavior-icon {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .behavior-icon i {
+        font-size: 11px; /* 更小屏幕上统一图标大小 */
+    }
+    
+    .behavior-description {
+        font-size: 9px;
+    }
+}
+
+/* 确保 Training 的内容也有两行 */
+.behavior-card.training .behavior-content {
+    white-space: pre-line; /* 允许换行符 */
+}
+
+/* Basic Information Optimization */
+.basic-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.basic-info-item {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.basic-info-item:hover {
+    background-color: #f2f2f7;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.basic-info-label {
+    font-size: 11px;
+    color: #6B7280;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.basic-info-value {
+    font-size: 15px;
+    color: #374151;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+/* Format styles for specific information types */
+.basic-info-value.microchip {
+    font-family: monospace;
+    letter-spacing: 0.5px;
+}
+
+.basic-info-value.breed {
+    color: #4A5568;
+    font-weight: 600;
+}
+
+.basic-info-value.age-weight {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.basic-info-value.age-weight .value-unit {
+    font-size: 13px;
+    color: #6B7280;
+    font-weight: normal;
+    margin-left: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 375px) {
+    .basic-info-item {
+        padding: 6px 10px;
+    }
+    
+    .basic-info-label {
+        font-size: 10px;
+    }
+    
+    .basic-info-value {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 320px) {
+    .basic-info-container {
+        gap: 12px;
+    }
+    
+    .basic-info-item {
+        padding: 6px 8px;
+    }
+    
+    .basic-info-label {
+        margin-bottom: 2px;
+    }
+    
+    .basic-info-value {
+        font-size: 13px;
+    }
+    
+    .basic-info-value.age-weight .value-unit {
+        font-size: 11px;
+    }
+}
+
+/* Home Page Optimizations */
+
+/* Health Stats Optimization */
+.health-stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px; /* 减小间距，使布局更紧凑 */
+    margin-bottom: 20px;
+}
+
+.health-stat-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 12px 8px; /* 水平内边距减小，更紧凑 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.health-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.08);
+}
+
+.stat-icon-container {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.heart-icon-bg {
+    background-color: #FFEBEE; /* 更鲜明的红色背景 */
+}
+
+.weight-icon-bg {
+    background-color: #E3F2FD; /* 更鲜明的蓝色背景 */
+}
+
+.calories-icon-bg {
+    background-color: #E8F5E9; /* 更鲜明的绿色背景 */
+}
+
+.stat-icon {
+    font-size: 16px;
+}
+
+.heart-icon {
+    color: #F44336; /* 更鲜明的红色 */
+}
+
+.weight-icon {
+    color: #2196F3; /* 更鲜明的蓝色 */
+}
+
+.calories-icon {
+    color: #4CAF50; /* 更鲜明的绿色 */
+}
+
+.stat-label {
+    font-size: 11px;
+    color: #6B7280;
+    font-weight: 500;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 18px; /* 增大数值字体 */
+    font-weight: 700; /* 更粗的字体 */
+    color: #374151; /* 更深的颜色，增强对比度 */
+    text-align: center;
+}
+
+/* Today's Tasks Optimization */
+.task-container {
+    margin-bottom: 16px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 12px 16px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+    padding-bottom: 4px;
+}
+
+.task-item:first-child {
+    padding-top: 4px;
+}
+
+.task-icon-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.task-content {
+    flex-grow: 1;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.task-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 2px;
+}
+
+.task-time {
+    font-size: 12px;
+    color: #6B7280;
+}
+
+.task-checkbox {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #D1D5DB;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.task-checkbox:hover {
+    border-color: #9CA3AF;
+    transform: scale(1.05);
+}
+
+/* Upcoming Vet Visit Optimization */
+.vet-visit-card {
+    background-color: #EBF8FF; /* 稍微加深蓝色背景 */
+    border: 1px solid #A9D0F5;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.vet-visit-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; /* 减小间距，更紧凑 */
+}
+
+.vet-icon {
+    color: #0D6EFD;
+    font-size: 16px;
+    margin-right: 8px;
+}
+
+.vet-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1E40AF;
+}
+
+.vet-info {
+    margin-left: 24px; /* 左侧缩进，与图标对齐 */
+    margin-bottom: 12px;
+}
+
+.vet-date, .vet-doctor {
+    font-size: 13px;
+    color: #1E3A8A;
+    margin-bottom: 4px;
+}
+
+.vet-date {
+    font-weight: 500;
+}
+
+.reschedule-btn {
+    background-color: #FFCC80; /* 柔和的橙色，更醒目 */
+    color: #E65100; /* 深橙色文字 */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 13px;
+    text-align: center;
+    transition: all 0.2s ease;
+    border: none;
+    box-shadow: 0 2px 4px rgba(230, 81, 0, 0.15);
+}
+
+.reschedule-btn:hover {
+    background-color: #FFB74D;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(230, 81, 0, 0.2);
+}
+
+/* Section title optimization */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.section-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #ff6b6b;
+    text-decoration: none;
+}
+
+.section-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 375px) {
+    .health-stats-container {
+        gap: 8px;
+    }
+    
+    .health-stat-card {
+        padding: 10px 6px;
+    }
+    
+    .stat-icon-container {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .stat-value {
+        font-size: 16px;
+    }
+    
+    .task-item {
+        padding: 8px 0;
+    }
+    
+    .task-icon-container {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .task-checkbox {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .vet-visit-card {
+        padding: 14px;
+    }
+}
+
+@media (max-width: 320px) {
+    .health-stats-container {
+        gap: 6px;
+    }
+    
+    .health-stat-card {
+        padding: 8px 4px;
+    }
+    
+    .stat-icon-container {
+        width: 34px;
+        height: 34px;
+        margin-bottom: 6px;
+    }
+    
+    .stat-icon {
+        font-size: 14px;
+    }
+    
+    .stat-value {
+        font-size: 15px;
+    }
+    
+    .stat-label {
+        font-size: 10px;
+    }
+    
+    .task-content {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+    
+    .task-icon-container {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .task-title {
+        font-size: 14px;
+    }
+    
+    .task-time {
+        font-size: 11px;
+    }
+    
+    .task-checkbox {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .vet-visit-card {
+        padding: 12px;
+    }
+    
+    .vet-title {
+        font-size: 15px;
+    }
+    
+    .vet-date, .vet-doctor {
+        font-size: 12px;
+    }
+    
+    .reschedule-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+} 

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcket - Tasks</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .time-indicator {
+            position: relative;
+            padding-left: 16px;
+        }
+        .time-indicator::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            bottom: -10px;
+            width: 2px;
+            background-color: #E5E7EB;
+            z-index: 0;
+        }
+        .time-dot {
+            position: absolute;
+            left: -4px;
+            top: 10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .task-card {
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+        .task-card:hover {
+            transform: translateX(4px);
+        }
+        .task-card.completed {
+            opacity: 0.8;
+        }
+        .task-card.medicine {
+            border-left-color: #8B5CF6;
+        }
+        .task-card.feeding {
+            border-left-color: #10B981;
+        }
+        .task-card.exercise {
+            border-left-color: #3B82F6;
+        }
+        .task-card.grooming {
+            border-left-color: #F59E0B;
+        }
+        .checkbox-container {
+            position: relative;
+        }
+        .task-checkbox {
+            transition: all 0.15s ease;
+        }
+        .task-checkbox:active {
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content pb-20">
+        <!-- Header -->
+        <div class="flex-between mb-5">
+            <div>
+                <h1 class="title mb-0">Pet Tasks</h1>
+                <p class="text-gray-500 text-sm">Keep track of your pet's daily routine</p>
+            </div>
+            <div class="flex">
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-2">
+                    <i class="fas fa-search text-gray-500"></i>
+                </button>
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-calendar-alt text-gray-500"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Date Selector -->
+        <div class="mb-6">
+            <div class="flex-between mb-3">
+                <h2 class="text-lg font-semibold flex items-center">
+                    <i class="fas fa-calendar-day text-purple-500 mr-2"></i>
+                    Monday, 15 May
+                </h2>
+                <div class="flex">
+                    <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-2">
+                        <i class="fas fa-chevron-left text-gray-500"></i>
+                    </button>
+                    <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-chevron-right text-gray-500"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Calendar View -->
+            <div class="bg-white rounded-xl shadow-sm p-4 mb-4">
+                <div class="grid grid-cols-7 mb-2">
+                    <div class="text-center text-xs font-medium text-gray-500">Su</div>
+                    <div class="text-center text-xs font-medium text-gray-500">Mo</div>
+                    <div class="text-center text-xs font-medium text-gray-500">Tu</div>
+                    <div class="text-center text-xs font-medium text-gray-500">We</div>
+                    <div class="text-center text-xs font-medium text-gray-500">Th</div>
+                    <div class="text-center text-xs font-medium text-gray-500">Fr</div>
+                    <div class="text-center text-xs font-medium text-gray-500">Sa</div>
+                </div>
+                
+                <div class="grid grid-cols-7 gap-1">
+                    <!-- Previous month dates -->
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs text-gray-400">30</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs text-gray-400">1</div>
+                    </div>
+                    <!-- Current month dates -->
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">2</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">3</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">4</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">5</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">6</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">7</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">8</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">9</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">10</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">11</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">12</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">13</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">14</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full bg-purple-500 flex items-center justify-center text-xs text-white">15</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">16</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">17</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">18</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">19</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">20</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">21</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">22</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">23</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">24</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">25</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">26</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">27</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">28</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">29</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">30</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs">31</div>
+                    </div>
+                    <!-- Next month dates -->
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs text-gray-400">1</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs text-gray-400">2</div>
+                    </div>
+                    <div class="aspect-square p-1">
+                        <div class="w-full h-full rounded-full flex items-center justify-center text-xs text-gray-400">3</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex space-x-3 overflow-x-auto">
+                <div class="flex items-center bg-purple-100 text-purple-700 px-3 py-1.5 rounded-lg text-xs">
+                    <i class="fas fa-tasks mr-1"></i>
+                    <span>8 tasks today</span>
+                </div>
+                <div class="flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs">
+                    <i class="fas fa-check-circle mr-1"></i>
+                    <span>3 completed</span>
+                </div>
+                <div class="flex items-center bg-orange-100 text-orange-700 px-3 py-1.5 rounded-lg text-xs">
+                    <i class="fas fa-exclamation-circle mr-1"></i>
+                    <span>2 high priority</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task Progress -->
+        <div class="mb-5 bg-white rounded-xl p-4 shadow-sm">
+            <h3 class="text-sm font-medium text-gray-500 mb-2">TODAY'S PROGRESS</h3>
+            <div class="flex items-center">
+                <div class="flex-1 bg-gray-200 rounded-full h-2.5 mr-3">
+                    <div class="bg-purple-500 h-2.5 rounded-full" style="width: 60%"></div>
+                </div>
+                <span class="text-sm font-medium">60%</span>
+            </div>
+            <div class="flex justify-between mt-3">
+                <div class="text-center">
+                    <p class="text-xs text-gray-500">COMPLETED</p>
+                    <p class="text-lg font-bold text-gray-800">3</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-xs text-gray-500">REMAINING</p>
+                    <p class="text-lg font-bold text-gray-800">5</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-xs text-gray-500">TOTAL</p>
+                    <p class="text-lg font-bold text-gray-800">8</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Morning Tasks -->
+        <div class="mb-6">
+            <div class="time-indicator">
+                <div class="time-dot bg-purple-500"></div>
+                <h3 class="text-sm font-semibold mb-3 bg-gray-50 inline-block pr-2 relative z-10">MORNING</h3>
+                
+                <!-- Task 1 -->
+                <div class="task-card medicine bg-white rounded-xl shadow-sm p-4 mb-3 relative">
+                    <div class="flex-between">
+                        <div class="flex-start">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-pills text-purple-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Morning Medicine</h3>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full mr-2">Medicine</span>
+                                    <p class="text-sm text-gray-500 flex items-center">
+                                        <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                        <span class="w-14 inline-block" style="display: inline-block; width: 60px; text-align: left;">8:00 AM</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-container">
+                            <div class="w-6 h-6 rounded-full border-2 border-gray-300 task-checkbox cursor-pointer"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Task 2 -->
+                <div class="task-card feeding bg-white rounded-xl shadow-sm p-4 mb-3 relative completed">
+                    <div class="flex-between">
+                        <div class="flex-start">
+                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-utensils text-green-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Breakfast</h3>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full mr-2">Feeding</span>
+                                    <p class="text-sm text-gray-500 flex items-center">
+                                        <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                        <span class="w-14 inline-block" style="display: inline-block; width: 60px; text-align: left;">8:30 AM</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-container">
+                            <div class="w-6 h-6 rounded-full bg-purple-500 border-2 border-purple-500 flex items-center justify-center task-checkbox cursor-pointer">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Task 3 -->
+                <div class="task-card exercise bg-white rounded-xl shadow-sm p-4 mb-3 relative completed">
+                    <div class="flex-between">
+                        <div class="flex-start">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-walking text-blue-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Morning Walk</h3>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full mr-2">Exercise</span>
+                                    <p class="text-sm text-gray-500 flex items-center">
+                                        <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                        <span class="w-14 inline-block" style="display: inline-block; width: 60px; text-align: left;">9:30 AM</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-container">
+                            <div class="w-6 h-6 rounded-full bg-purple-500 border-2 border-purple-500 flex items-center justify-center task-checkbox cursor-pointer">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Afternoon Tasks -->
+        <div class="mb-6">
+            <div class="time-indicator">
+                <div class="time-dot bg-orange-500"></div>
+                <h3 class="text-sm font-semibold mb-3 bg-gray-50 inline-block pr-2 relative z-10">AFTERNOON</h3>
+                
+                <!-- Task 1 -->
+                <div class="task-card feeding bg-white rounded-xl shadow-sm p-4 mb-3 relative completed">
+                    <div class="flex-between">
+                        <div class="flex-start">
+                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-utensils text-green-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Lunch</h3>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full mr-2">Feeding</span>
+                                    <p class="text-sm text-gray-500 flex items-center">
+                                        <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                        <span class="w-14 inline-block" style="display: inline-block; width: 60px; text-align: left;">1:00 PM</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-container">
+                            <div class="w-6 h-6 rounded-full bg-purple-500 border-2 border-purple-500 flex items-center justify-center task-checkbox cursor-pointer">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Task 2 -->
+                <div class="task-card exercise bg-white rounded-xl shadow-sm p-4 relative">
+                    <div class="flex-between">
+                        <div class="flex-start">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-walking text-blue-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Afternoon Walk</h3>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full mr-2">Exercise</span>
+                                    <p class="text-sm text-gray-500 flex items-center">
+                                        <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                        <span class="w-14 inline-block" style="display: inline-block; width: 60px; text-align: left;">4:30 PM</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-container">
+                            <div class="w-6 h-6 rounded-full border-2 border-gray-300 task-checkbox cursor-pointer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evening Tasks -->
+        <div>
+            <div class="time-indicator">
+                <div class="time-dot bg-indigo-500"></div>
+                <h3 class="text-sm font-semibold mb-3 bg-gray-50 inline-block pr-2 relative z-10">EVENING</h3>
+                
+                <!-- Task 1 -->
+                <div class="task-card feeding bg-white rounded-xl shadow-sm p-4 mb-3 relative">
+                    <div class="flex-between">
+                        <div class="flex-start">
+                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-utensils text-green-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Dinner</h3>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full mr-2">Feeding</span>
+                                    <p class="text-sm text-gray-500 flex items-center">
+                                        <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                        <span class="w-14 inline-block" style="display: inline-block; width: 60px; text-align: left;">6:30 PM</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-container">
+                            <div class="w-6 h-6 rounded-full border-2 border-gray-300 task-checkbox cursor-pointer"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Task 2 -->
+                <div class="task-card grooming bg-white rounded-xl shadow-sm p-4 mb-3 relative">
+                    <div class="flex-between">
+                        <div class="flex-start">
+                            <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mr-3" style="background-color: #FFCC80;">
+                                <i class="fas fa-bath text-orange-500" style="color: #F97316;"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Bath Time</h3>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full mr-2" style="background-color: #FFE0B2; color: #F97316;">Grooming</span>
+                                    <p class="text-sm text-gray-500 flex items-center">
+                                        <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                        <span class="w-14 inline-block" style="display: inline-block; width: 60px; text-align: left;">7:00 PM</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-container">
+                            <div class="w-6 h-6 rounded-full border-2 border-gray-300 task-checkbox cursor-pointer"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Task 3 -->
+                <div class="task-card medicine bg-white rounded-xl shadow-sm p-4 relative">
+                    <div class="flex-between">
+                        <div class="flex-start">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-pills text-purple-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Evening Medicine</h3>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full mr-2">Medicine</span>
+                                    <p class="text-sm text-gray-500 flex items-center">
+                                        <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                        <span class="w-14 inline-block" style="display: inline-block; width: 60px; text-align: left;">9:00 PM</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-container">
+                            <div class="w-6 h-6 rounded-full border-2 border-gray-300 task-checkbox cursor-pointer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="fixed bottom-24 right-4 w-14 h-14 bg-purple-500 rounded-full shadow-lg flex items-center justify-center">
+        <i class="fas fa-plus text-white text-xl"></i>
+    </button>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="profile.html" class="tab-item">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>My Pets</span>
+        </a>
+        <a href="match.html" class="tab-item">
+            <i class="fas fa-heart tab-icon"></i>
+            <span>Match</span>
+        </a>
+        <a href="social.html" class="tab-item">
+            <i class="fas fa-users tab-icon"></i>
+            <span>Social</span>
+        </a>
+        <a href="chat.html" class="tab-item">
+            <i class="fas fa-comment tab-icon"></i>
+            <span>Chat</span>
+        </a>
+    </div>
+</body>
+</html> 

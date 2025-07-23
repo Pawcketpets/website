@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcket - Create Event</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100%;
+            position: relative;
+            background-color: #f5f5f7;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .form-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 4px;
+            display: block;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+            background-color: #fff;
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+            background-color: #fff;
+            font-size: 15px;
+            min-height: 120px;
+            margin-bottom: 16px;
+            resize: none;
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+            background-color: #fff;
+            font-size: 15px;
+            margin-bottom: 16px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+        
+        .form-section {
+            margin-bottom: 20px;
+        }
+        
+        .image-upload-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 8px 0;
+            margin-bottom: 16px;
+        }
+        
+        .image-upload-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            border: 1px dashed #9CA3AF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            background-color: #F9FAFB;
+        }
+        
+        .image-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        
+        .image-preview .remove-image {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #EF4444;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            cursor: pointer;
+        }
+        
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .tag {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .tag.active {
+            background-color: #8B5CF6;
+            color: white;
+        }
+        
+        .tag:not(.active) {
+            background-color: #F3F4F6;
+            color: #4B5563;
+        }
+        
+        .date-time-container {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .date-time-container > div {
+            flex: 1;
+        }
+        
+        .icon-input {
+            position: relative;
+        }
+        
+        .icon-input i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9CA3AF;
+        }
+        
+        .icon-input input {
+            padding-left: 36px;
+        }
+        
+        /* Ensure date inputs use English format */
+        input[type="date"]::-webkit-calendar-picker-indicator,
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center">
+                <a href="social.html" class="mr-4">
+                    <i class="fas fa-times text-gray-500 text-xl"></i>
+                </a>
+                <h1 class="header-title">Create Event</h1>
+            </div>
+            <button class="bg-purple-500 text-white font-semibold px-4 py-2 rounded-full text-sm">
+                Publish
+            </button>
+        </div>
+        
+        <!-- Event Form -->
+        <form>
+            <!-- Image Upload Section -->
+            <div class="form-section">
+                <label class="form-label">Event Cover Image</label>
+                <div class="image-upload-container">
+                    <div class="image-upload-box">
+                        <i class="fas fa-plus text-gray-400"></i>
+                        <input type="file" accept="image/*" class="hidden" id="image-upload">
+                    </div>
+                    <!-- Sample image preview -->
+                    <div class="image-preview">
+                        <img src="https://images.pexels.com/photos/1633522/pexels-photo-1633522.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Preview">
+                        <div class="remove-image">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event Type -->
+            <div class="form-section">
+                <label class="form-label">Event Type</label>
+                <div class="tag-container">
+                    <div class="tag active">
+                        <i class="fas fa-users mr-1"></i> Meetup
+                    </div>
+                    <div class="tag">
+                        <i class="fas fa-search mr-1"></i> Lost Pet
+                    </div>
+                    <div class="tag">
+                        <i class="fas fa-home mr-1"></i> Adoption
+                    </div>
+                    <div class="tag">
+                        <i class="fas fa-graduation-cap mr-1"></i> Training
+                    </div>
+                    <div class="tag">
+                        <i class="fas fa-calendar mr-1"></i> Other
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Title & Description -->
+            <div class="form-section">
+                <label for="event-title" class="form-label">Event Title</label>
+                <input type="text" id="event-title" class="form-input" placeholder="Add a title for your event">
+                
+                <label for="event-description" class="form-label">Description</label>
+                <textarea id="event-description" class="form-textarea" placeholder="Describe your event..."></textarea>
+            </div>
+            
+            <!-- Date & Time -->
+            <div class="form-section">
+                <label class="form-label">Date & Time</label>
+                <div class="date-time-container mb-4">
+                    <div>
+                        <label for="start-date" class="form-label text-xs text-gray-500">Start Date</label>
+                        <div class="icon-input">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="date" id="start-date" class="form-input" lang="en-US">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="start-time" class="form-label text-xs text-gray-500">Start Time</label>
+                        <div class="icon-input">
+                            <i class="fas fa-clock"></i>
+                            <input type="time" id="start-time" class="form-input" lang="en-US">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="date-time-container">
+                    <div>
+                        <label for="end-date" class="form-label text-xs text-gray-500">End Date</label>
+                        <div class="icon-input">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="date" id="end-date" class="form-input" lang="en-US">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="end-time" class="form-label text-xs text-gray-500">End Time</label>
+                        <div class="icon-input">
+                            <i class="fas fa-clock"></i>
+                            <input type="time" id="end-time" class="form-input" lang="en-US">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Location -->
+            <div class="form-section">
+                <label for="location" class="form-label">Location</label>
+                <div class="relative">
+                    <input type="text" id="location" class="form-input" placeholder="Add event location">
+                </div>
+            </div>
+            
+            <!-- Pet Types -->
+            <div class="form-section">
+                <label class="form-label">Suitable For</label>
+                <div class="tag-container">
+                    <div class="tag active">Dogs</div>
+                    <div class="tag">Cats</div>
+                    <div class="tag">Birds</div>
+                    <div class="tag">Small Pets</div>
+                    <div class="tag">All Pets</div>
+                </div>
+            </div>
+            
+            <!-- Capacity & Cost -->
+            <div class="form-section">
+                <div class="flex gap-4">
+                    <div class="flex-1">
+                        <label for="capacity" class="form-label">Capacity</label>
+                        <input type="number" id="capacity" class="form-input" placeholder="Max attendees">
+                    </div>
+                    <div class="flex-1">
+                        <label for="cost" class="form-label">Cost</label>
+                        <input type="text" id="cost" class="form-input" placeholder="Free or $">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="form-section">
+                <label for="contact" class="form-label">Contact Information</label>
+                <input type="text" id="contact" class="form-input" placeholder="Phone, email, or website">
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Handle tag selection
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                // For event type, only allow one selection
+                if (this.parentElement.querySelector('.tag.active') && 
+                    this.parentElement.children[0].textContent.includes('Meetup')) {
+                    document.querySelectorAll('.tag').forEach(t => {
+                        if (t.parentElement === this.parentElement) {
+                            t.classList.remove('active');
+                        }
+                    });
+                }
+                this.classList.toggle('active');
+            });
+        });
+        
+        // Connect image upload button
+        document.querySelector('.image-upload-box').addEventListener('click', function() {
+            document.getElementById('image-upload').click();
+        });
+        
+        // Handle image upload preview (simplified version)
+        document.getElementById('image-upload').addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+                // In a real app, you would handle the file upload and preview here
+                alert('File selected: ' + file.name);
+            }
+        });
+        
+        // Force English locale for date pickers
+        document.querySelectorAll('input[type="date"], input[type="time"]').forEach(input => {
+            // Set English locale for date/time pickers
+            input.setAttribute('lang', 'en-US');
+        });
+    </script>
+</body>
+</html> 
