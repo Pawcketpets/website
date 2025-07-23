@@ -216,26 +216,27 @@ body {
 }
 
 .phone-frame {
-    width: 350px;
-    height: 700px;
-    background: #333;
-    border-radius: 30px;
+    width: 375px;
+    height: 812px;
+    background: #1a1a1a;
+    border-radius: 40px;
     padding: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 12px solid #1a1a1a;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     position: relative;
     overflow: hidden;
 }
 
 .notch {
     position: absolute;
-    width: 120px;
-    height: 25px;
-    background: #333;
+    width: 150px;
+    height: 30px;
+    background: #1a1a1a;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     z-index: 10;
 }
 
@@ -243,7 +244,7 @@ body {
     width: 100%;
     height: 100%;
     border: none;
-    border-radius: 25px;
+    border-radius: 28px;
     background: white;
 }
 
@@ -774,14 +775,14 @@ body {
     }
 
     .phone-frame {
-        width: 320px;
-        height: 640px;
+        width: 340px;
+        height: 740px;
         margin: 0 auto;
     }
 
     .notch {
-        width: 110px;
-        height: 22px;
+        width: 130px;
+        height: 26px;
     }
 
     .app-screens {
@@ -870,14 +871,14 @@ body {
     }
 
     .phone-frame {
-        width: 300px;
-        height: 600px;
+        width: 320px;
+        height: 680px;
         margin: 0 auto;
     }
 
     .notch {
-        width: 100px;
-        height: 20px;
+        width: 120px;
+        height: 24px;
     }
 
     .app-screens {
@@ -940,14 +941,14 @@ body {
     }
 
     .phone-frame {
-        width: 280px;
-        height: 560px;
+        width: 300px;
+        height: 640px;
         margin: 0 auto;
     }
 
     .notch {
-        width: 90px;
-        height: 18px;
+        width: 110px;
+        height: 22px;
     }
 
     .app-screens {
