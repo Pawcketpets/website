@@ -765,37 +765,37 @@ body {
     }
 
     .phone-frame {
-        width: 280px;
-        height: 560px;
+        width: 320px;
+        height: 640px;
         margin: 0 auto;
     }
 
     .notch {
-        width: 100px;
-        height: 20px;
+        width: 110px;
+        height: 22px;
     }
 
     .app-screens {
-        gap: 12px;
-        padding: 12px;
-        margin-top: 20px;
+        gap: 15px;
+        padding: 15px;
+        margin-top: 25px;
         flex-wrap: wrap;
         justify-content: center;
     }
 
     .screen-preview {
-        min-width: 70px;
-        padding: 10px 8px;
+        min-width: 80px;
+        padding: 12px 10px;
     }
 
     .preview-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 18px;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
     }
 
     .screen-preview span {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .pain-grid,
@@ -832,35 +832,35 @@ body {
     }
 
     .phone-frame {
-        width: 240px;
-        height: 480px;
+        width: 300px;
+        height: 600px;
         margin: 0 auto;
     }
 
     .notch {
-        width: 80px;
-        height: 18px;
+        width: 100px;
+        height: 20px;
     }
 
     .app-screens {
-        gap: 8px;
-        padding: 8px;
-        margin-top: 15px;
+        gap: 12px;
+        padding: 12px;
+        margin-top: 20px;
     }
 
     .screen-preview {
-        min-width: 60px;
-        padding: 8px 6px;
+        min-width: 70px;
+        padding: 10px 8px;
     }
 
     .preview-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 14px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
     }
 
     .screen-preview span {
-        font-size: 10px;
+        font-size: 11px;
     }
 }
 
@@ -878,34 +878,34 @@ body {
     }
 
     .phone-frame {
-        width: 220px;
-        height: 440px;
+        width: 280px;
+        height: 560px;
         margin: 0 auto;
     }
 
     .notch {
-        width: 70px;
-        height: 16px;
+        width: 90px;
+        height: 18px;
     }
 
     .app-screens {
-        gap: 6px;
-        padding: 6px;
-        margin-top: 12px;
+        gap: 10px;
+        padding: 10px;
+        margin-top: 15px;
     }
 
     .screen-preview {
-        min-width: 55px;
-        padding: 6px 4px;
+        min-width: 65px;
+        padding: 8px 6px;
     }
 
     .preview-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 12px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
     }
 
     .screen-preview span {
-        font-size: 9px;
+        font-size: 10px;
     }
 } 
