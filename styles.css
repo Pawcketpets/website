@@ -746,7 +746,7 @@ body {
 
     .hero-container {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 30px;
         text-align: center;
     }
 
@@ -760,23 +760,42 @@ body {
     }
 
     .app-showcase {
-        gap: 20px;
+        gap: 15px;
+        width: 100%;
     }
 
     .phone-frame {
-        width: 300px;
-        height: 600px;
+        width: 280px;
+        height: 560px;
+        margin: 0 auto;
+    }
+
+    .notch {
+        width: 100px;
+        height: 20px;
     }
 
     .app-screens {
-        gap: 15px;
-        padding: 15px;
+        gap: 12px;
+        padding: 12px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .screen-preview {
+        min-width: 70px;
+        padding: 10px 8px;
     }
 
     .preview-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .screen-preview span {
+        font-size: 11px;
     }
 
     .pain-grid,
@@ -808,23 +827,85 @@ body {
         font-size: 1rem;
     }
 
+    .app-showcase {
+        gap: 10px;
+    }
+
     .phone-frame {
-        width: 250px;
-        height: 500px;
+        width: 240px;
+        height: 480px;
+        margin: 0 auto;
+    }
+
+    .notch {
+        width: 80px;
+        height: 18px;
     }
 
     .app-screens {
-        gap: 10px;
-        padding: 10px;
+        gap: 8px;
+        padding: 8px;
+        margin-top: 15px;
+    }
+
+    .screen-preview {
+        min-width: 60px;
+        padding: 8px 6px;
     }
 
     .preview-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
     }
 
     .screen-preview span {
-        font-size: 11px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 375px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+    }
+
+    .app-showcase {
+        gap: 8px;
+    }
+
+    .phone-frame {
+        width: 220px;
+        height: 440px;
+        margin: 0 auto;
+    }
+
+    .notch {
+        width: 70px;
+        height: 16px;
+    }
+
+    .app-screens {
+        gap: 6px;
+        padding: 6px;
+        margin-top: 12px;
+    }
+
+    .screen-preview {
+        min-width: 55px;
+        padding: 6px 4px;
+    }
+
+    .preview-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .screen-preview span {
+        font-size: 9px;
     }
 } 
