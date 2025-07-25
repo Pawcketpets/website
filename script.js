@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = 'translateY(0) scale(1)';
         });
     });
-});
+}); 
 
 // App Screen Switching
 document.addEventListener('DOMContentLoaded', () => {
