@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Pet - Buddy</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .pet-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            margin-bottom: 1.5rem;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pet-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(1.05); /* Slightly scale up to avoid any potential edge gaps */
+        }
+        
+        .pet-speech-bubble {
+            position: absolute;
+            top: 60px;
+            right: 15px;
+            background-color: white;
+            border-radius: 16px;
+            padding: 8px 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 150px;
+            z-index: 10;
+        }
+        
+        .pet-speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 24px;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-top-color: white;
+            border-bottom: 0;
+        }
+
+        .pet-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content px-4 pb-24 pt-4 max-w-md mx-auto">
+        <!-- Pet Info Card -->
+        <div class="bg-white rounded-2xl shadow flex items-center justify-between p-4 mb-6">
+            <div class="flex items-center">
+                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=120&q=80" class="w-14 h-14 rounded-full object-cover mr-4 border-2 border-gray-100">
+                <div>
+                    <div class="font-bold text-lg text-gray-900">Buddy</div>
+                    <div class="text-xs text-gray-400">Golden Retriever • 3 years • Male</div>
+                </div>
+            </div>
+            <div class="flex flex-col items-end gap-2">
+                <div class="flex items-center text-green-500 text-xs font-semibold bg-green-50 rounded-lg px-2 py-1 mb-1">
+                    <i class="fas fa-heart-pulse mr-1"></i> Healthy
+                </div>
+                <button class="bg-gray-100 text-gray-600 rounded-lg px-3 py-1 text-xs font-medium flex items-center"><i class="fas fa-cog mr-1"></i>Settings</button>
+            </div>
+        </div>
+
+        <!-- Pet Figure -->
+        <div class="pet-container">
+            <img src="model.webp" alt="Virtual Pet Buddy" class="pet-image">
+            <div class="pet-overlay"></div>
+            <div class="pet-speech-bubble">
+                <div class="text-sm text-gray-600 font-medium">I'm eating now!</div>
+            </div>
+        </div>
+
+        <!-- Affection Card -->
+        <div class="bg-white rounded-2xl shadow flex items-center justify-between p-4 mb-6">
+            <div class="flex items-center">
+                <div class="w-10 h-10 flex items-center justify-center bg-pink-50 rounded-full mr-3">
+                    <i class="fas fa-heart text-pink-400 text-xl"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-gray-400">Affection</div>
+                    <div class="font-bold text-lg text-pink-500">85</div>
+                </div>
+            </div>
+            <div class="w-32 h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-pink-400 to-pink-200 rounded-full" style="width:85%"></div>
+            </div>
+        </div>
+
+        <!-- Main Actions -->
+        <div class="flex justify-center gap-6 mb-6">
+            <button class="flex-1 bg-gradient-to-r from-purple-400 to-pink-400 text-white font-bold py-3 rounded-xl shadow text-lg flex items-center justify-center gap-2"><i class="fas fa-utensils"></i> Feed</button>
+            <button class="flex-1 bg-gradient-to-r from-blue-400 to-purple-400 text-white font-bold py-3 rounded-xl shadow text-lg flex items-center justify-center gap-2"><i class="fas fa-gamepad"></i> Play</button>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-3 gap-4 mb-4">
+            <button class="bg-white rounded-xl shadow flex flex-col items-center py-3 px-2 text-sm text-gray-700 font-medium hover:bg-gray-50"><i class="fas fa-history text-blue-400 text-xl mb-1"></i>View Activity</button>
+            <button class="bg-white rounded-xl shadow flex flex-col items-center py-3 px-2 text-sm text-gray-700 font-medium hover:bg-gray-50"><i class="fas fa-walking text-purple-400 text-xl mb-1"></i>Go for a Walk</button>
+            <button class="bg-white rounded-xl shadow flex flex-col items-center py-3 px-2 text-sm text-gray-700 font-medium hover:bg-gray-50"><i class="fas fa-heartbeat text-pink-400 text-xl mb-1"></i>Health Report</button>
+        </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="virtual_pet.html" class="tab-item active">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>Virtual Pet</span>
+        </a>
+        <div class="tab-item">
+            <a href="post_menu.html">
+                <button class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center -mt-6 border-4 border-white transition-transform hover:scale-105">
+                    <i class="fas fa-plus text-white text-xl"></i>
+                </button>
+            </a>
+        </div>
+        <a href="social.html" class="tab-item">
+            <i class="fas fa-camera tab-icon"></i>
+            <span>Social</span>
+        </a>
+        <a href="user_profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html> 

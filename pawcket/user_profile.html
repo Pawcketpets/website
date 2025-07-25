@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcket - Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        .profile-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .profile-header {
+            display: flex;
+            margin-bottom: 8px;
+        }
+        
+        .profile-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .profile-pic {
+            width: 70px;
+            height: 70px;
+            border-radius: 35px;
+            overflow: hidden;
+            border: 1px solid #efefef;
+        }
+        
+        .profile-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 2px;
+        }
+        
+        .name-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3px;
+        }
+        
+        .profile-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin-right: 8px;
+        }
+        
+        .profile-username {
+            font-size: 14px;
+            color: #6B7280;
+        }
+        
+        .bio-content {
+            font-size: 12px;
+            line-height: 1.3;
+            color: #4b5563;
+            margin-bottom: 4px;
+        }
+        
+        .location {
+            display: flex;
+            align-items: center;
+            color: #6B7280;
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+        
+        .location i {
+            margin-right: 3px;
+            font-size: 11px;
+        }
+        
+        .bio-row {
+            display: flex;
+            align-items: center;
+        }
+        
+        .bio-link {
+            color: #ff6b6b;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 0;
+        }
+        
+        .stats-wrapper {
+            display: flex;
+            justify-content: flex-start;
+            margin-right: 12px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            margin-right: 20px;
+        }
+        
+        .stat-item:last-child {
+            margin-right: 0;
+        }
+        
+        .stat-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            color: #6B7280;
+            margin-top: 0;
+        }
+        
+        .edit-profile-btn {
+            background-color: #f2f2f7;
+            color: #111827;
+            border-radius: 12px;
+            padding: 6px 12px;
+            font-weight: 600;
+            font-size: 12px;
+            text-align: center;
+            border: none;
+            white-space: nowrap;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+        }
+        
+        .section-link {
+            color: #ff6b6b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .pet-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .pet-item {
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .pet-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+        
+        .pet-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 8px 12px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .content-tabs {
+            display: flex;
+            background-color: #ffffff;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .tab {
+            flex: 1;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6B7280;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .tab.active {
+            color: #ff6b6b;
+            position: relative;
+        }
+        
+        .tab.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ff6b6b;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .empty-state {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 32px 16px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .empty-state-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+            color: #d1d5db;
+        }
+        
+        .empty-state-title {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+        
+        .empty-state-message {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            color: #6B7280;
+        }
+        
+        .action-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-block;
+            border: none;
+        }
+        
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
+            margin-bottom: 16px;
+        }
+        
+        .post-item {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            position: relative;
+            border-radius: 4px;
+        }
+        
+        .post-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Align settings button with profile text */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .title {
+            line-height: 1.2;
+            margin: 0;
+            font-size: 22px;
+        }
+        
+        .settings-btn {
+            width: 38px;
+            height: 38px;
+            background-color: #f2f2f7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0;
+            margin-right: 4px;
+        }
+        
+        /* Move content up */
+        .content {
+            padding-top: 10px;
+        }
+        
+        .profile-card {
+            margin-top: 5px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Header -->
+        <div class="header-container">
+            <h1 class="title">Profile</h1>
+            <button class="settings-btn">
+                <i class="fas fa-cog text-gray-500"></i>
+            </button>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-left">
+                    <div class="profile-pic">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" 
+                            class="w-full h-full object-cover" alt="Profile Picture">
+                    </div>
+                </div>
+                
+                <div class="profile-info">
+                    <div class="name-container">
+                        <div class="profile-name">Alex</div>
+                        <div class="profile-username">@alex_sf</div>
+                    </div>
+                    <div class="bio-content">
+                        Dog lover and pet photographer.
+                    </div>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>Edmonton, Alberta
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-row">
+                <div class="stats-wrapper">
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Posts</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24</div>
+                        <div class="stat-label">Followers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">36</div>
+                        <div class="stat-label">Following</div>
+                    </div>
+                </div>
+                
+                <button class="edit-profile-btn">Edit Profile</button>
+            </div>
+        </div>
+        
+        <!-- Content Tabs -->
+        <div class="content-tabs">
+            <div class="tab active" onclick="showTab('posts')">
+                <i class="fas fa-th mr-1"></i> Posts
+            </div>
+            <div class="tab" onclick="showTab('saved')">
+                <i class="far fa-bookmark mr-1"></i> Saved
+            </div>
+            <div class="tab" onclick="showTab('tagged')">
+                <i class="fas fa-tag mr-1"></i> Tagged
+            </div>
+        </div>
+        
+        <!-- Posts Tab Content -->
+        <div id="posts-tab" class="tab-content active">
+            <div class="post-grid">
+                <!-- Post 1: Buddy portrait -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Post 2: Buddy at park -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Post 3: Buddy playing -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Post 4: Park scene -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1568480289356-5a75d0fd47fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Post 5: Buddy napping -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1530041539828-114de669390e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Post 6: Park trail -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1508330570239-ce7cabceee22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Post 7: Buddy with toy -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Post 8: Local dog park -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Post 9: Morning walk -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1505628346881-b72b27e84530?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Post 10: Buddy with friends -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1601979031925-424e53b6caaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Post 11: Edmonton park -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1568480289356-5a75d0fd47fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Post 12: Buddy in snow -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1517423568366-8b83523034fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+            </div>
+        </div>
+    
+        <!-- Saved Tab Content -->
+        <div id="saved-tab" class="tab-content">
+            <div class="post-grid">
+                <!-- Saved 1: Dog training tips -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Saved 2: Pet-friendly cafe -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1559570278-eb8d71d06403?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Saved 3: Dog photography tips -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Saved 4: Edmonton dog park -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Saved 5: Pet care article -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1553322396-0c9cd410975e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Saved 6: Dog-friendly hiking trail -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+            </div>
+        </div>
+    
+        <!-- Tagged Tab Content -->
+        <div id="tagged-tab" class="tab-content">
+            <div class="post-grid">
+                <!-- Tagged 1: Local dog event -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1551730459-92db2a308d6a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Tagged 2: Edmonton pet shelter -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+                
+                <!-- Tagged 3: Friends with dogs -->
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                        class="post-img">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="virtual_pet.html" class="tab-item">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>Virtual Pet</span>
+        </a>
+        <div class="tab-item">
+            <a href="post_menu.html">
+                <button class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center -mt-6 border-4 border-white transition-transform hover:scale-105">
+                    <i class="fas fa-plus text-white text-xl"></i>
+                </button>
+            </a>
+        </div>
+        <a href="social.html" class="tab-item">
+            <i class="fas fa-camera tab-icon"></i>
+            <span>Social</span>
+        </a>
+        <a href="user_profile.html" class="tab-item active">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+
+    <!-- JavaScript for tab switching -->
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show the selected tab content
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to the clicked tab
+            if (tabName === 'posts') {
+                document.querySelectorAll('.tab')[0].classList.add('active');
+            } else if (tabName === 'saved') {
+                document.querySelectorAll('.tab')[1].classList.add('active');
+            } else if (tabName === 'tagged') {
+                document.querySelectorAll('.tab')[2].classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html> 

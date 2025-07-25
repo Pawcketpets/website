@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcket - Events</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100%;
+            position: relative;
+            background-color: #f5f5f7;
+        }
+        .post-title {
+            font-weight: 500;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            color: #111827;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .user-name {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #4B5563;
+        }
+        .like-count {
+            font-size: 0.75rem;
+            color: #6B7280;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        .event-date {
+            font-size: 0.75rem;
+            color: #6B7280;
+        }
+        .event-tag {
+            display: inline-block;
+            font-size: 0.625rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+        .tag-meetup {
+            background-color: #DBEAFE;
+            color: #1E40AF;
+        }
+        .tag-lost {
+            background-color: #FEE2E2;
+            color: #B91C1C;
+        }
+        .tag-adoption {
+            background-color: #D1FAE5;
+            color: #065F46;
+        }
+        .tag-training {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+        .event-category {
+            display: none;
+        }
+        .event-category.active {
+            display: block;
+        }
+        
+        /* Icon styles */
+        .meetup-icon {
+            color: #3B82F6;
+            margin-right: 0.25rem;
+        }
+        .lost-icon {
+            color: #EF4444;
+            margin-right: 0.25rem;
+        }
+        .adoption-icon {
+            color: #10B981;
+            margin-right: 0.25rem;
+        }
+        .training-icon {
+            color: #F59E0B;
+            margin-right: 0.25rem;
+        }
+        
+        /* Active filter styles */
+        .filter-btn.active .meetup-icon,
+        .filter-btn.active .lost-icon,
+        .filter-btn.active .adoption-icon,
+        .filter-btn.active .training-icon {
+            color: white;
+        }
+        
+        /* Fix for bottom white space */
+        #all-events {
+            min-height: calc(100vh - 220px); /* Accounts for header, tabs, filters, and tab bar */
+        }
+        
+        .header-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+        
+        .header-link:hover {
+            color: #8B5CF6;
+        }
+        
+        .header-link-arrow {
+            margin-left: 6px;
+            font-size: 14px;
+        }
+        
+        .header-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Header -->
+        <div class="flex-between mb-6">
+            <div class="flex items-center h-10">
+                <a href="match.html" class="header-link">
+                    <h1 class="header-title">Social</h1>
+                    <i class="fas fa-chevron-right header-link-arrow text-purple-500"></i>
+                </a>
+            </div>
+            <div class="flex items-center">
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-2">
+                    <i class="fas fa-search text-gray-500"></i>
+                </button>
+                <a href="chat.html">
+                    <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-comment text-purple-500"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex bg-gray-100 rounded-lg p-1 mb-4">
+            <a href="social.html" class="flex-1">
+                <button class="flex-1 py-2 text-gray-500 text-sm font-medium w-full">Activity</button>
+            </a>
+            <a href="nearby.html" class="flex-1">
+                <button class="flex-1 py-2 text-gray-500 text-sm font-medium w-full">Nearby</button>
+            </a>
+            <button class="flex-1 py-2 rounded-lg bg-white shadow text-sm font-medium">Events</button>
+        </div>
+
+        <!-- Event Filters -->
+        <div class="flex space-x-2 mb-4 overflow-x-auto py-1" id="event-filters">
+            <button onclick="filterEvents('all')" class="filter-btn active px-3 py-1 bg-purple-500 text-white text-xs font-medium rounded-full whitespace-nowrap">
+                All Events
+            </button>
+            <button onclick="filterEvents('meetup')" class="filter-btn px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
+                <i class="fas fa-users meetup-icon"></i> Meetups
+            </button>
+            <button onclick="filterEvents('lost')" class="filter-btn px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
+                <i class="fas fa-search lost-icon"></i> Lost Pets
+            </button>
+            <button onclick="filterEvents('adoption')" class="filter-btn px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
+                <i class="fas fa-home adoption-icon"></i> Adoption
+            </button>
+            <button onclick="filterEvents('training')" class="filter-btn px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
+                <i class="fas fa-graduation-cap training-icon"></i> Training
+            </button>
+        </div>
+
+        <!-- Events List - All Events -->
+        <div id="all-events" class="event-category active space-y-4 mb-6">
+            <!-- Event 1 - Meetup -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden event-item" data-type="meetup">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/1633522/pexels-photo-1633522.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-meetup">Meetup</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">Golden Retriever Playdate in the Park</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">June 15, 2023 • 10:00 AM - 12:00 PM</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Hawrelak Park, Edmonton</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Join us for a fun Golden Retriever meetup! Bring your furry friend for playtime, socializing, and treats. All Golden Retrievers welcome!
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Thomas Zhang</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Interested
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 2 - Lost Pet -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden event-item" data-type="lost">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-lost">Lost Pet</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">MISSING: Bella, Brown Tabby Cat</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Missing since June 10, 2023</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Oliver District, Edmonton</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Our cat Bella went missing from the Oliver District area. She is a brown tabby with white paws and a white chest. Very friendly, wearing a blue collar with ID tag. Please contact if you see her!
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Emily Wilson</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Contact
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 3 - Adoption -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden event-item" data-type="adoption">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-adoption">Adoption</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">Puppies Looking for Forever Homes</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Available from June 20, 2023</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Edmonton Humane Society, West Edmonton</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Six adorable rescue puppies (mixed breed) looking for loving homes. They've been vet-checked, vaccinated, and microchipped. Please inquire if you'd like to meet them and potentially adopt!
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Edmonton Humane Society</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Inquire
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 4 - Training -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden event-item" data-type="training">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/7210356/pexels-photo-7210356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-training">Training</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">Basic Dog Obedience Course</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Starts June 22, 2023 • 6:00 PM - 7:00 PM (6 weeks)</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Paws & Train Center, West Edmonton</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Our popular 6-week basic obedience course teaches essential commands including sit, stay, come, and leash walking. Perfect for puppies and dogs of all ages. Limited to 8 dogs per class for personalized attention.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Jason Waters, Certified Trainer</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Register
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 5 - Meetup -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden event-item" data-type="meetup">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3">
+                        <span class="event-tag tag-meetup">Meetup</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-base mb-1">Monthly Cat Lovers Gathering</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">June 25, 2023 • 3:00 PM - 5:00 PM</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-2 text-xs"></i>
+                        <span class="event-date">Catfe Edmonton, Whyte Avenue</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">
+                        It's that time of the month again! Come join fellow cat lovers for our monthly gathering. Share stories, tips, and photos of your feline friends. Cat-themed refreshments provided!
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Sarah Lee</span>
+                        </div>
+                        <button class="text-xs bg-purple-500 text-white py-1 px-3 rounded-full font-medium">
+                            Interested
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="virtual_pet.html" class="tab-item">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>Virtual Pet</span>
+        </a>
+        <div class="tab-item">
+            <a href="post_menu.html">
+                <button class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center -mt-6 border-4 border-white transition-transform hover:scale-105">
+                    <i class="fas fa-plus text-white text-xl"></i>
+                </button>
+            </a>
+        </div>
+        <a href="social.html" class="tab-item active">
+            <i class="fas fa-camera tab-icon"></i>
+            <span>Social</span>
+        </a>
+        <a href="user_profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+
+    <script>
+        function filterEvents(type) {
+            // Get all filter buttons and remove active class
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            const clickedButton = document.querySelector(`[onclick="filterEvents('${type}')"]`);
+            clickedButton.classList.add('active');
+            
+            if (type === 'all') {
+                // Show all events
+                const events = document.querySelectorAll('.event-item');
+                events.forEach(event => event.style.display = 'block');
+            } else {
+                // Hide all events
+                const allEvents = document.querySelectorAll('.event-item');
+                allEvents.forEach(event => event.style.display = 'none');
+                
+                // Show only events of selected type
+                const filteredEvents = document.querySelectorAll(`.event-item[data-type="${type}"]`);
+                filteredEvents.forEach(event => event.style.display = 'block');
+            }
+        }
+    </script>
+</body>
+</html> 

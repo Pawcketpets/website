@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcket - Messages</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .notification-categories {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 16px;
+        }
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+        }
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+        .likes-icon {
+            background-color: #FFEBEE;
+        }
+        .follows-icon {
+            background-color: #E3F2FD;
+        }
+        .comments-icon {
+            background-color: #E8F5E9;
+        }
+        .category-icon i {
+            font-size: 24px;
+        }
+        .likes-icon i {
+            color: #ff6b6b;
+        }
+        .follows-icon i {
+            color: #5ac8fa;
+        }
+        .comments-icon i {
+            color: #4CAF50;
+        }
+        .category-label {
+            font-size: 13px;
+            text-align: center;
+            color: #374151;
+            font-weight: 500;
+        }
+        .chat-container {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .chat-item {
+            display: flex;
+            padding: 14px 16px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .chat-item:last-child {
+            border-bottom: none;
+        }
+        .chat-avatar-container {
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+            margin-right: 12px;
+        }
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            object-fit: cover;
+        }
+        .chat-content {
+            flex-grow: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        .chat-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: #111827;
+        }
+        .chat-preview {
+            font-size: 13px;
+            color: #6B7280;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            width: 100%;
+        }
+        .chat-time {
+            font-size: 12px;
+            color: #9CA3AF;
+            white-space: nowrap;
+            margin-left: 8px;
+        }
+        .unread-badge {
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 9999px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+        }
+        .notification-item {
+            display: flex;
+            padding: 14px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            align-items: center;
+        }
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        .notification-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 22.5px;
+            object-fit: cover;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .notification-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .notification-title {
+            font-size: 14px;
+            color: #111827;
+            margin-bottom: 2px;
+        }
+        .notification-date {
+            font-size: 12px;
+            color: #9CA3AF;
+            margin-left: 8px;
+            white-space: nowrap;
+        }
+        .red-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+            margin-left: 8px;
+        }
+        .follow-button {
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 10px;
+            border: none;
+        }
+        .content {
+            padding: 8px 16px;
+            padding-bottom: 103px; /* Space for tab bar */
+            min-height: calc(100vh - 44px); /* Full viewport height minus status bar */
+            overflow-y: auto;
+            position: relative;
+            box-sizing: border-box;
+        }
+        
+        .title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Header -->
+        <div class="flex-between mb-4">
+            <div class="flex items-center">
+                <a href="social.html" class="mr-3">
+                    <i class="fas fa-chevron-left text-purple-500 text-xl"></i>
+                </a>
+                <h1 class="title">Messages</h1>
+            </div>
+            <div class="flex">
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-2">
+                    <i class="fas fa-search text-gray-500"></i>
+                </button>
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-edit text-gray-500"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Notification Categories -->
+        <div class="notification-categories">
+            <a href="likes.html" class="category-item">
+                <div class="category-icon likes-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="category-label">Likes</div>
+            </a>
+            <a href="follows.html" class="category-item">
+                <div class="category-icon follows-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="category-label">New Follows</div>
+            </a>
+            <a href="comments.html" class="category-item">
+                <div class="category-icon comments-icon">
+                    <i class="fas fa-comment"></i>
+                </div>
+                <div class="category-label">Comments</div>
+            </a>
+        </div>
+
+        <!-- Messages Content -->
+        <div id="messages-tab" class="chat-container">
+            <!-- Active Chat Item -->
+            <a href="chatdetail.html?user=emilywilson&avatar=https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-item block">
+                <div class="chat-avatar-container">
+                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-avatar">
+                </div>
+                <div class="chat-content">
+                    <div class="chat-header">
+                        <span class="chat-name">Emily Wilson</span>
+                        <div class="flex items-center">
+                            <span class="chat-time">10:42 AM</span>
+                            <div class="unread-badge">3</div>
+                        </div>
+                    </div>
+                    <p class="chat-preview">Luna and Buddy would love to have a playdate this weekend! What do you think?</p>
+                </div>
+            </a>
+
+            <!-- Regular Chat Items -->
+            <a href="chatdetail.html?user=davidchen&avatar=https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-item block">
+                <div class="chat-avatar-container">
+                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-avatar">
+                </div>
+                <div class="chat-content">
+                    <div class="chat-header">
+                        <span class="chat-name">David Chen</span>
+                        <span class="chat-time">Yesterday</span>
+                    </div>
+                    <p class="chat-preview">I found a great pet-friendly café downtown! We should meet there sometime.</p>
+                </div>
+            </a>
+
+            <a href="chatdetail.html?user=sarahlee&avatar=https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-item block">
+                <div class="chat-avatar-container">
+                    <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-avatar">
+                </div>
+                <div class="chat-content">
+                    <div class="chat-header">
+                        <span class="chat-name">Sarah Lee</span>
+                        <span class="chat-time">Yesterday</span>
+                    </div>
+                    <p class="chat-preview">Thanks for the hiking trail recommendation! My dog loved it!</p>
+                </div>
+            </a>
+
+            <a href="chatdetail.html?user=michaelpark&avatar=https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-item block">
+                <div class="chat-avatar-container">
+                    <img src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-avatar">
+                </div>
+                <div class="chat-content">
+                    <div class="chat-header">
+                        <span class="chat-name">Michael Park</span>
+                        <span class="chat-time">Monday</span>
+                    </div>
+                    <p class="chat-preview">Do you have any recommendations for a good dog groomer in the area?</p>
+                </div>
+            </a>
+
+            <a href="chatdetail.html?user=thomaszhang&avatar=https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-item block">
+                <div class="chat-avatar-container">
+                    <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-avatar">
+                </div>
+                <div class="chat-content">
+                    <div class="chat-header">
+                        <span class="chat-name">Thomas Zhang</span>
+                        <div class="flex items-center">
+                            <span class="chat-time">Sunday</span>
+                            <div class="unread-badge">1</div>
+                        </div>
+                    </div>
+                    <p class="chat-preview">Hello! I just adopted a new puppy. Any advice for a first-time dog owner?</p>
+                </div>
+            </a>
+            
+            <a href="chatdetail.html?user=vetclinicedmonton&avatar=https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-item block">
+                <div class="chat-avatar-container">
+                    <img src="https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-avatar">
+                </div>
+                <div class="chat-content">
+                    <div class="chat-header">
+                        <span class="chat-name">VetClinic Edmonton</span>
+                        <div class="flex items-center">
+                            <span class="chat-time">Friday</span>
+                            <div class="unread-badge">2</div>
+                        </div>
+                    </div>
+                    <p class="chat-preview">Your appointment for Buddy's annual checkup is confirmed for May 22nd at 2:30 PM. Please arrive 15 minutes early.</p>
+                </div>
+            </a>
+            
+            <a href="chatdetail.html?user=edmontondogwalkers&avatar=https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-item block">
+                <div class="chat-avatar-container">
+                    <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150" class="chat-avatar">
+                </div>
+                <div class="chat-content">
+                    <div class="chat-header">
+                        <span class="chat-name">Edmonton Dog Walkers</span>
+                        <span class="chat-time">May 8</span>
+                    </div>
+                    <p class="chat-preview">We've added a new dog walker in your area who specializes in high-energy breeds. Would you like to schedule a meet & greet?</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="virtual_pet.html" class="tab-item">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>Virtual Pet</span>
+        </a>
+        <div class="tab-item">
+            <a href="post_menu.html">
+                <button class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center -mt-6 border-4 border-white transition-transform hover:scale-105">
+                    <i class="fas fa-plus text-white text-xl"></i>
+                </button>
+            </a>
+        </div>
+        <a href="social.html" class="tab-item">
+            <i class="fas fa-camera tab-icon"></i>
+            <span>Social</span>
+        </a>
+        <a href="user_profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+
+    <script>
+        // No longer need the showTab function since we're using separate pages
+    </script>
+</body>
+</html> 

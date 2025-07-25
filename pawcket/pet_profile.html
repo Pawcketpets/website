@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcket - Pet Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Header with back button -->
+        <div class="flex items-center mb-6">
+            <a href="home.html" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-4">
+                <i class="fas fa-arrow-left text-gray-500"></i>
+            </a>
+            <h1 class="title mb-0">Pet Profile</h1>
+        </div>
+
+        <!-- Pet Profile Header -->
+        <div class="card flex flex-col items-center p-6 mb-6">
+            <div class="relative mb-4">
+                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                     class="pet-avatar-large">
+                <button class="absolute bottom-0 right-0 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center border border-gray-200">
+                    <i class="fas fa-camera text-gray-500"></i>
+                </button>
+            </div>
+            <h2 class="text-xl font-bold mb-1">Buddy</h2>
+            <p class="text-gray-500 text-sm mb-4">Golden Retriever • Male • 3 years</p>
+            <div class="flex space-x-2">
+                <button class="primary-button py-2 px-4 text-sm">
+                    <i class="fas fa-edit mr-2"></i>Edit Profile
+                </button>
+                <button class="secondary-button py-2 px-4 text-sm">
+                    <i class="fas fa-share-alt mr-2"></i>Share
+                </button>
+            </div>
+        </div>
+
+        <!-- Basic Information -->
+        <div class="card mb-6">
+            <h3 class="subtitle">Basic Information</h3>
+            <div class="basic-info-container">
+                <div class="basic-info-item">
+                    <p class="basic-info-label">Breed</p>
+                    <p class="basic-info-value breed">Golden Retriever</p>
+                </div>
+                <div class="basic-info-item">
+                    <p class="basic-info-label">Gender</p>
+                    <p class="basic-info-value">Male</p>
+                </div>
+                <div class="basic-info-item">
+                    <p class="basic-info-label">Age</p>
+                    <p class="basic-info-value age-weight">
+                        <span>3 years 2 months</span>
+                        <span class="value-unit">Born Mar 12, 2020</span>
+                    </p>
+                </div>
+                <div class="basic-info-item">
+                    <p class="basic-info-label">Weight</p>
+                    <p class="basic-info-value age-weight">
+                        <span>32 kg</span>
+                        <span class="value-unit">Last updated: May 10, 2023</span>
+                    </p>
+                </div>
+                <div class="basic-info-item">
+                    <p class="basic-info-label">Microchip ID</p>
+                    <p class="basic-info-value microchip">985-1210-3328-4767</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health Records -->
+        <div class="card mb-6">
+            <div class="flex-between mb-4">
+                <h3 class="subtitle mb-0">Health Records</h3>
+                <button class="text-sm font-medium pet-primary">Add New</button>
+            </div>
+            
+            <!-- Vaccination Records -->
+            <div class="mb-4">
+                <div class="flex-between mb-2">
+                    <h4 class="font-semibold">Vaccinations</h4>
+                    <button class="text-sm text-gray-500">See All</button>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg divide-y">
+                    <div class="p-3 flex-between">
+                        <div>
+                            <p class="font-medium">Rabies Vaccine</p>
+                            <p class="text-sm text-gray-500">Apr 15, 2023</p>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-xs bg-green-100 text-green-800 py-1 px-2 rounded-full mr-2">Valid</span>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="p-3 flex-between">
+                        <div>
+                            <p class="font-medium">DHPP Vaccine</p>
+                            <p class="text-sm text-gray-500">Jan 10, 2023</p>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-xs bg-green-100 text-green-800 py-1 px-2 rounded-full mr-2">Valid</span>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="p-3 flex-between">
+                        <div>
+                            <p class="font-medium">Bordetella Vaccine</p>
+                            <p class="text-sm text-gray-500">Nov 5, 2022</p>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-xs bg-yellow-100 text-yellow-800 py-1 px-2 rounded-full mr-2">Expiring</span>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Medical History -->
+            <div>
+                <div class="flex-between mb-2">
+                    <h4 class="font-semibold">Medical History</h4>
+                    <button class="text-sm text-gray-500">See All</button>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg divide-y">
+                    <div class="p-3 flex-between">
+                        <div>
+                            <p class="font-medium">Annual Checkup</p>
+                            <p class="text-sm text-gray-500">Mar 20, 2023</p>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    
+                    <div class="p-3 flex-between">
+                        <div>
+                            <p class="font-medium">Dental Cleaning</p>
+                            <p class="text-sm text-gray-500">Dec 12, 2022</p>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diet Information -->
+        <div class="card mb-6">
+            <h3 class="subtitle">Diet Information</h3>
+            
+            <div class="mb-4">
+                <h4 class="font-semibold mb-2">Daily Food</h4>
+                <div class="diet-item">
+                    <div class="diet-info">
+                        <img src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=60&q=80" 
+                             class="diet-food-img">
+                        <div class="diet-food-details">
+                            <p class="diet-food-name">Premium Dry Dog Food</p>
+                            <p class="diet-food-brand">Royal Canin</p>
+                        </div>
+                    </div>
+                    <div class="diet-quantity">300g × 2</div>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold mb-2">Allergies & Restrictions</h4>
+                <div class="allergies-container">
+                    <span class="allergy-tag severe">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Chicken
+                    </span>
+                    <span class="allergy-tag severe">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Wheat
+                    </span>
+                    <span class="allergy-tag moderate">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Dairy (Mild)
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Behavior & Training -->
+        <div class="card mb-6">
+            <h3 class="subtitle">Behavior & Training</h3>
+            
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="behavior-card">
+                    <div class="behavior-header">
+                        <div class="behavior-icon" style="background-color: #FFF9C4; color: #FBC02D;">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="behavior-title">Traits</p>
+                    </div>
+                    <div class="behavior-content-wrapper">
+                        <p class="behavior-content">Friendly, Gentle, Playful</p>
+                        <p class="behavior-description">Primary personality characteristics</p>
+                    </div>
+                </div>
+                
+                <div class="behavior-card training">
+                    <div class="behavior-header">
+                        <div class="behavior-icon" style="background-color: #E3F2FD; color: #2196F3;">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <p class="behavior-title">Training</p>
+                    </div>
+                    <div class="behavior-content-wrapper">
+                        <p class="behavior-content">Intermediate Training Level</p>
+                        <p class="behavior-description">Obedience and skill development</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="behavior-card special-notes">
+                <div class="behavior-header">
+                    <div class="behavior-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <p class="behavior-title">Special Notes</p>
+                </div>
+                <div class="behavior-content-wrapper">
+                    <p class="behavior-content">Afraid of thunderstorms. Needs extra comfort during loud noises.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="virtual_pet.html" class="tab-item">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>Virtual Pet</span>
+        </a>
+        <a href="social.html" class="tab-item">
+            <i class="fas fa-camera tab-icon"></i>
+            <span>Social</span>
+        </a>
+        <a href="chat.html" class="tab-item">
+            <i class="fas fa-comment tab-icon"></i>
+            <span>Chat</span>
+        </a>
+        <a href="user_profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html> 
