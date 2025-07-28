@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Health Card - Buddy</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .health-card {
+            display: flex;
+            width: 900px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .profile-section {
+            width: 300px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+        }
+        
+        .pet-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 15px;
+        }
+        
+        .pet-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .pet-basic {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .info-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            font-size: 10px;
+            opacity: 0.8;
+            margin-bottom: 2px;
+        }
+        
+        .info-value {
+            font-size: 12px;
+        }
+        
+        .microchip-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 12px;
+            border-radius: 8px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .records-container {
+            flex: 1;
+            display: flex;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+        }
+        
+        .health-section {
+            flex: 1;
+            padding: 30px;
+            background: white;
+            border-right: 2px solid #e5f3e0;
+            position: relative;
+        }
+        
+        .health-section::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -10px;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: #10b981;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            position: relative;
+        }
+        
+        .section-header::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            border-radius: 2px;
+        }
+        
+        .section-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            color: #10b981;
+        }
+        
+        .vaccine-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 8px;
+            background: #f8faf8;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+            transition: all 0.3s ease;
+        }
+        
+        .vaccine-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+        
+        .vaccine-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .vaccine-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .vaccine-date {
+            color: #666;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        
+        .status-valid {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+        
+        .status-expiring {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+        
+        .medical-section {
+            flex: 1;
+            padding: 30px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .medical-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .medical-box {
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #d1fae5;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .medical-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #10b981, #34d399);
+        }
+        
+        .medical-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.1);
+        }
+        
+        .medical-label {
+            font-size: 10px;
+            color: #059669;
+            font-weight: bold;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .medical-value {
+            font-size: 13px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .qr-code {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            border-radius: 16px;
+            margin-top: auto;
+            border: 2px dashed #10b981;
+            position: relative;
+        }
+        
+        .qr-code::before {
+            content: 'Scan for complete info';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            color: #059669;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+        
+        .qr-code img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .share-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .share-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <button class="share-button">
+        <i class="fas fa-share-alt mr-2"></i>
+        分享卡片
+    </button>
+    
+    <div class="health-card">
+        <!-- 左侧：宠物信息和基本信息 -->
+        <div class="profile-section">
+            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                 alt="Buddy" class="pet-avatar">
+            <div class="pet-name">Buddy</div>
+            <div class="pet-basic">Golden Retriever • Male • 3 years</div>
+            
+            <div class="section-header" style="margin-bottom: 15px;">
+                <i class="fas fa-info-circle section-icon"></i>
+                Basic Information
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-box">
+                    <div class="info-label">BREED</div>
+                    <div class="info-value">Golden Retriever</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-label">GENDER</div>
+                    <div class="info-value">Male</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-label">AGE</div>
+                    <div class="info-value">3 years 2 months</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-label">WEIGHT</div>
+                    <div class="info-value">32 kg</div>
+                </div>
+            </div>
+            
+            <div class="microchip-box">
+                <div class="info-label">MICROCHIP ID</div>
+                <div class="info-value">985-1210-3328-4767</div>
+            </div>
+        </div>
+        
+        <!-- 右侧记录容器 -->
+        <div class="records-container">
+            <!-- 中间：健康记录 -->
+            <div class="health-section">
+                <div class="section-header">
+                    <i class="fas fa-heart section-icon"></i>
+                    Health Records
+                </div>
+                
+                <div class="vaccine-item">
+                    <div>
+                        <div class="vaccine-name">Rabies Vaccine</div>
+                        <div class="vaccine-date">Apr 15, 2023</div>
+                    </div>
+                    <span class="status-valid">VALID</span>
+                </div>
+                
+                <div class="vaccine-item">
+                    <div>
+                        <div class="vaccine-name">DHPP Vaccine</div>
+                        <div class="vaccine-date">Jan 10, 2023</div>
+                    </div>
+                    <span class="status-valid">VALID</span>
+                </div>
+                
+                <div class="vaccine-item">
+                    <div>
+                        <div class="vaccine-name">Bordetella Vaccine</div>
+                        <div class="vaccine-date">Nov 5, 2022</div>
+                    </div>
+                    <span class="status-expiring">EXPIRING</span>
+                </div>
+            </div>
+            
+            <!-- 右侧：医疗记录和二维码 -->
+            <div class="medical-section">
+                <div class="section-header">
+                    <i class="fas fa-stethoscope section-icon"></i>
+                    Medical Records
+                </div>
+                
+                <div class="medical-grid">
+                    <div class="medical-box">
+                        <div class="medical-label">LAST CHECKUP</div>
+                        <div class="medical-value">Mar 20, 2023</div>
+                    </div>
+                    <div class="medical-box">
+                        <div class="medical-label">NEXT CHECKUP</div>
+                        <div class="medical-value">Mar 20, 2024</div>
+                    </div>
+                    <div class="medical-box">
+                        <div class="medical-label">BLOOD TYPE</div>
+                        <div class="medical-value">DEA 1.1 Negative</div>
+                    </div>
+                    <div class="medical-box">
+                        <div class="medical-label">ALLERGIES</div>
+                        <div class="medical-value">Chicken, Wheat</div>
+                    </div>
+                </div>
+                
+                <div class="qr-code">
+                    <img src="health qr code.png" 
+                         alt="Health QR Code">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 生成健康卡图片用于分享
+        async function generateHealthCardImage() {
+            const card = document.querySelector('.health-card');
+            
+            // 使用html2canvas库来生成图片
+            if (typeof html2canvas === 'undefined') {
+                // 如果html2canvas未加载，动态加载它
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+                document.head.appendChild(script);
+                
+                return new Promise((resolve) => {
+                    script.onload = () => {
+                        html2canvas(card, {
+                            scale: 2,
+                            useCORS: true,
+                            allowTaint: true,
+                            backgroundColor: '#ffffff'
+                        }).then(canvas => {
+                            canvas.toBlob(resolve, 'image/png');
+                        });
+                    };
+                });
+            } else {
+                return new Promise((resolve) => {
+                    html2canvas(card, {
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: true,
+                        backgroundColor: '#ffffff'
+                    }).then(canvas => {
+                        canvas.toBlob(resolve, 'image/png');
+                    });
+                });
+            }
+        }
+
+        // 分享健康卡
+        async function shareHealthCard() {
+            try {
+                // 生成健康卡图片
+                const imageBlob = await generateHealthCardImage();
+                
+                // 创建文件对象
+                const imageFile = new File([imageBlob], 'buddy-health-card.png', {
+                    type: 'image/png'
+                });
+
+                // 检查是否支持原生分享API
+                if (navigator.share && navigator.canShare) {
+                    // 检查是否可以分享文件
+                    if (navigator.canShare({ files: [imageFile] })) {
+                        await navigator.share({
+                            title: 'Buddy的健康记录卡',
+                            text: '查看Buddy的完整健康信息 - 包含疫苗接种记录、医疗历史和基本信息',
+                            files: [imageFile],
+                            url: window.location.href
+                        });
+                    } else {
+                        // 如果不支持文件分享，只分享文本和链接
+                        await navigator.share({
+                            title: 'Buddy的健康记录卡',
+                            text: '查看Buddy的完整健康信息 - 包含疫苗接种记录、医疗历史和基本信息',
+                            url: window.location.href
+                        });
+                    }
+                } else {
+                    // 降级处理：创建下载链接
+                    const url = URL.createObjectURL(imageBlob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'buddy-health-card.png';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    alert('健康卡已保存到您的设备！您可以手动分享这张图片。');
+                }
+            } catch (error) {
+                console.error('分享失败:', error);
+                
+                // 如果分享失败，提供手动分享选项
+                if (confirm('自动分享失败。是否要保存健康卡图片到您的设备？')) {
+                    try {
+                        const imageBlob = await generateHealthCardImage();
+                        const url = URL.createObjectURL(imageBlob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'buddy-health-card.png';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        alert('健康卡已保存！');
+                    } catch (saveError) {
+                        alert('保存失败，请稍后重试。');
+                    }
+                }
+            }
+        }
+
+        // 添加分享按钮事件监听器
+        document.querySelector('.share-button').addEventListener('click', shareHealthCard);
+
+        // 添加键盘快捷键支持
+        document.addEventListener('keydown', function(event) {
+            // Ctrl/Cmd + S 快捷键分享
+            if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+                event.preventDefault();
+                shareHealthCard();
+            }
+        });
+
+        // 添加触摸手势支持（长按分享）
+        let longPressTimer;
+        const card = document.querySelector('.health-card');
+        
+        card.addEventListener('touchstart', function() {
+            longPressTimer = setTimeout(() => {
+                shareHealthCard();
+            }, 1000);
+        });
+        
+        card.addEventListener('touchend', function() {
+            clearTimeout(longPressTimer);
+        });
+        
+        card.addEventListener('touchmove', function() {
+            clearTimeout(longPressTimer);
+        });
+    </script>
+</body>
+</html> 

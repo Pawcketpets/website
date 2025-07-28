@@ -7,6 +7,533 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* Share Card Overlay Styles - 重新设计 */
+        .share-card-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            display: none;
+        }
+        
+        .share-card-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 15px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 100px; /* Add extra padding to avoid tab bar */
+        }
+        
+        .share-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e7eb;
+            flex-shrink: 0;
+        }
+        
+        .share-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .close-share-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        
+        .share-card-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            min-height: 180px;
+            overflow: hidden;
+        }
+        
+        .share-card-header-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .share-pet-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+            margin: 0 auto 10px;
+        }
+        
+        .share-pet-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .share-pet-info {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .share-card-section {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .share-card-section:last-child {
+            border-bottom: none;
+        }
+        
+        .share-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .share-section-title i {
+            margin-right: 8px;
+            color: #8B5CF6;
+            font-size: 12px;
+        }
+        
+        .share-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .share-info-item {
+            background: #f9fafb;
+            padding: 8px 10px;
+            border-radius: 6px;
+            border-left: 2px solid #8B5CF6;
+        }
+        
+        .share-info-label {
+            font-size: 10px;
+            color: #6b7280;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+        
+        .share-info-value {
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .share-vaccination-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .share-vaccination-item:last-child {
+            border-bottom: none;
+        }
+        
+        .share-vaccination-info h4 {
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 2px;
+        }
+        
+        .share-vaccination-info p {
+            font-size: 10px;
+            color: #6b7280;
+        }
+        
+        .share-vaccination-status {
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .share-status-valid {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .share-status-expiring {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .share-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            padding: 0 5px 8px 5px;
+            margin-bottom: 8px;
+            flex-shrink: 0;
+        }
+        
+        .share-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            flex: 1;
+            outline: none;
+        }
+        
+        .share-option:hover {
+            transform: scale(1.05);
+        }
+        
+        .share-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: white;
+            border: none;
+            outline: none;
+        }
+        
+        .share-icon.message {
+            background: #00C851;
+        }
+        
+        .share-icon.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        
+        .share-icon.x {
+            background: #000000;
+        }
+        
+        .share-icon.email {
+            background: #4285F4;
+        }
+        
+        .share-icon.messenger {
+            background: #0084FF;
+        }
+        
+        .share-option span {
+            font-size: 10px;
+            color: #6B7280;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .share-generated-date {
+            text-align: center;
+            padding: 10px 20px;
+            background: #f9fafb;
+            font-size: 10px;
+            color: #6b7280;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        /* 健康卡图片容器样式 */
+        .health-card-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        .health-card-image {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-section-share {
+            flex: 1;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            padding: 1.2em 0.8em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            justify-content: space-between;
+        }
+        
+        .pet-avatar-share {
+            width: 3em;
+            height: 3em;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 0.18em solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 0.6em;
+        }
+        
+        .pet-name-share {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 0.2em;
+        }
+        
+        .pet-basic-share {
+            font-size: 0.8em;
+            opacity: 0.9;
+            margin-bottom: 1em;
+            text-align: center;
+        }
+        
+        .section-header-share {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.7em;
+            font-size: 0.9em;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .section-header-share::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.3em;
+            width: 2em;
+            height: 0.1em;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            border-radius: 0.05em;
+        }
+        
+        .section-icon-share {
+            width: 1em;
+            height: 1em;
+            margin-right: 0.4em;
+            color: #10b981;
+        }
+        
+        .info-grid-share {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.3em;
+            width: 100%;
+            margin-bottom: 0.6em;
+        }
+        
+        .info-box-share {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5em 0.6em;
+            border-radius: 0.4em;
+            font-size: 0.7em;
+        }
+        
+        .info-label-share {
+            font-weight: bold;
+            font-size: 0.6em;
+            opacity: 0.8;
+            margin-bottom: 0.1em;
+        }
+        
+        .info-value-share {
+            font-size: 0.7em;
+        }
+        
+        .microchip-box-share {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.6em 0.8em;
+            border-radius: 0.4em;
+            width: 100%;
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        .records-container-share {
+            flex: 1;
+            display: flex;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+        }
+        
+        .health-section-share {
+            flex: 1;
+            padding: 1em 0.8em;
+            background: white;
+            border-right: 0.1em solid #e5f3e0;
+            position: relative;
+        }
+        
+        .health-section-share::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -0.5em;
+            transform: translateY(-50%);
+            width: 1em;
+            height: 1em;
+            background: #10b981;
+            border-radius: 50%;
+            border: 0.2em solid white;
+            box-shadow: 0 0.1em 0.4em rgba(16, 185, 129, 0.3);
+        }
+        
+        .vaccine-item-share {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5em 0.6em;
+            margin-bottom: 0.4em;
+            background: #f8faf8;
+            border-radius: 0.5em;
+            border-left: 0.2em solid #10b981;
+        }
+        
+        .vaccine-name-share {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.8em;
+        }
+        
+        .vaccine-date-share {
+            color: #666;
+            font-size: 0.6em;
+            margin-top: 0.1em;
+        }
+        
+        .status-valid-share {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: white;
+            padding: 0.2em 0.5em;
+            border-radius: 0.7em;
+            font-size: 0.6em;
+            font-weight: 600;
+        }
+        
+        .status-expiring-share {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            color: white;
+            padding: 0.2em 0.5em;
+            border-radius: 0.7em;
+            font-size: 0.6em;
+            font-weight: 600;
+        }
+        
+        .medical-section-share {
+            flex: 1;
+            padding: 1em 0.8em;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .medical-grid-share {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5em;
+            margin-bottom: 0.8em;
+        }
+        
+        .medical-box-share {
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            padding: 0.5em 0.6em;
+            border-radius: 0.5em;
+            border: 0.1em solid #d1fae5;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .medical-box-share::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0.2em;
+            height: 100%;
+            background: linear-gradient(180deg, #10b981, #34d399);
+        }
+        
+        .medical-label-share {
+            font-size: 0.6em;
+            color: #059669;
+            font-weight: bold;
+            margin-bottom: 0.2em;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+        
+        .medical-value-share {
+            font-size: 0.7em;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .qr-code-share {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            border-radius: 0.5em;
+            margin-top: auto;
+            border: 0.1em dashed #10b981;
+            position: relative;
+        }
+        
+        .qr-code-share::before {
+            content: '扫描查看完整信息';
+            position: absolute;
+            top: 0.4em;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6em;
+            color: #059669;
+            font-weight: 500;
+        }
+        
+        .qr-code-share img {
+            width: 2.8em;
+            height: 2.8em;
+            border-radius: 0.4em;
+            box-shadow: 0 0.1em 0.4em rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Status Bar -->
@@ -44,7 +571,7 @@
                 <button class="primary-button py-2 px-4 text-sm">
                     <i class="fas fa-edit mr-2"></i>Edit Profile
                 </button>
-                <button class="secondary-button py-2 px-4 text-sm">
+                <button class="secondary-button py-2 px-4 text-sm" onclick="generateShareCard()">
                     <i class="fas fa-share-alt mr-2"></i>Share
                 </button>
             </div>
@@ -254,18 +781,237 @@
             <i class="fas fa-paw tab-icon"></i>
             <span>Virtual Pet</span>
         </a>
+        <div class="tab-item">
+            <a href="post_menu.html">
+                <button class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center -mt-6 border-4 border-white transition-transform hover:scale-105">
+                    <i class="fas fa-plus text-white text-xl"></i>
+                </button>
+            </a>
+        </div>
         <a href="social.html" class="tab-item">
             <i class="fas fa-camera tab-icon"></i>
             <span>Social</span>
-        </a>
-        <a href="chat.html" class="tab-item">
-            <i class="fas fa-comment tab-icon"></i>
-            <span>Chat</span>
         </a>
         <a href="user_profile.html" class="tab-item">
             <i class="fas fa-user tab-icon"></i>
             <span>Profile</span>
         </a>
     </div>
+
+    <!-- Share Card Overlay -->
+    <div id="shareCardOverlay" class="share-card-overlay">
+        <div class="share-card-container">
+            <!-- Share Card Header -->
+            <div class="share-card-header">
+                <h3 class="share-card-title">Share Card</h3>
+                <button onclick="closeShareCard()" class="close-share-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Share Card Content -->
+            <div class="share-card-content" id="shareCardContent">
+                <!-- 使用healthcard.png图片 -->
+                <div class="health-card-image-container">
+                    <img src="healthcard.png" alt="Buddy Health Card" class="health-card-image">
+                </div>
+            </div>
+
+            <!-- Share Options -->
+            <div class="share-options">
+                <button class="share-option" onclick="shareToMessage()">
+                    <div class="share-icon message">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <span>Message</span>
+                </button>
+                <button class="share-option" onclick="shareToInstagram()">
+                    <div class="share-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <span>Instagram</span>
+                </button>
+                <button class="share-option" onclick="shareToX()">
+                    <div class="share-icon x">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <span>X</span>
+                </button>
+                <button class="share-option" onclick="shareToEmail()">
+                    <div class="share-icon email">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <span>Email</span>
+                </button>
+                <button class="share-option" onclick="shareToMessenger()">
+                    <div class="share-icon messenger">
+                        <i class="fab fa-facebook-messenger"></i>
+                    </div>
+                    <span>Messenger</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate share card function
+        function generateShareCard() {
+            // Show share card overlay
+            document.getElementById('shareCardOverlay').style.display = 'block';
+        }
+        
+        // Close share card function
+        function closeShareCard() {
+            document.getElementById('shareCardOverlay').style.display = 'none';
+        }
+        
+        // 获取healthcard.png图片用于分享
+        async function getHealthCardImage() {
+            try {
+                const response = await fetch('healthcard.png');
+                const blob = await response.blob();
+                return blob;
+            } catch (error) {
+                console.error('获取健康卡图片失败:', error);
+                throw error;
+            }
+        }
+
+        // Share functions for different platforms
+        async function shareToMessage() {
+            try {
+                const imageBlob = await getHealthCardImage();
+                const imageFile = new File([imageBlob], 'buddy-health-card.png', { type: 'image/png' });
+                
+                if (navigator.share && navigator.canShare && navigator.canShare({ files: [imageFile] })) {
+                    await navigator.share({
+                        title: 'Buddy的健康记录卡',
+                        text: '查看Buddy的完整健康信息',
+                        files: [imageFile]
+                    });
+                } else {
+                    // 降级处理：下载图片
+                    const url = URL.createObjectURL(imageBlob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'buddy-health-card.png';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    alert('健康卡已保存！您可以手动分享这张图片。');
+                }
+            } catch (error) {
+                console.error('分享失败:', error);
+                alert('分享失败，请稍后重试。');
+            }
+        }
+        
+        async function shareToInstagram() {
+            try {
+                const imageBlob = await getHealthCardImage();
+                const url = URL.createObjectURL(imageBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'buddy-health-card.png';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                alert('健康卡已保存！请手动上传到Instagram。');
+            } catch (error) {
+                alert('保存失败，请稍后重试。');
+            }
+        }
+        
+        async function shareToX() {
+            try {
+                const imageBlob = await getHealthCardImage();
+                const imageFile = new File([imageBlob], 'buddy-health-card.png', { type: 'image/png' });
+                
+                if (navigator.share && navigator.canShare && navigator.canShare({ files: [imageFile] })) {
+                    await navigator.share({
+                        title: 'Buddy的健康记录卡',
+                        text: '查看Buddy的完整健康信息 #Pawcket #PetHealth',
+                        files: [imageFile]
+                    });
+                } else {
+                    // 降级处理：下载图片
+                    const url = URL.createObjectURL(imageBlob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'buddy-health-card.png';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    alert('健康卡已保存！您可以手动分享到X。');
+                }
+            } catch (error) {
+                console.error('分享失败:', error);
+                alert('分享失败，请稍后重试。');
+            }
+        }
+        
+        async function shareToEmail() {
+            try {
+                const imageBlob = await getHealthCardImage();
+                const imageFile = new File([imageBlob], 'buddy-health-card.png', { type: 'image/png' });
+                
+                if (navigator.share && navigator.canShare && navigator.canShare({ files: [imageFile] })) {
+                    await navigator.share({
+                        title: 'Buddy的健康记录卡',
+                        text: '查看Buddy的完整健康信息',
+                        files: [imageFile]
+                    });
+                } else {
+                    // 降级处理：邮件链接
+                    const subject = 'Buddy的健康记录卡 - Pawcket';
+                    const body = '查看Buddy的完整健康信息\n\n包含疫苗接种记录、医疗历史和基本信息。';
+                    const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.open(mailtoLink);
+                }
+            } catch (error) {
+                console.error('分享失败:', error);
+                alert('分享失败，请稍后重试。');
+            }
+        }
+        
+        async function shareToMessenger() {
+            try {
+                const imageBlob = await getHealthCardImage();
+                const imageFile = new File([imageBlob], 'buddy-health-card.png', { type: 'image/png' });
+                
+                if (navigator.share && navigator.canShare && navigator.canShare({ files: [imageFile] })) {
+                    await navigator.share({
+                        title: 'Buddy的健康记录卡',
+                        text: '查看Buddy的完整健康信息',
+                        files: [imageFile]
+                    });
+                } else {
+                    // 降级处理：下载图片
+                    const url = URL.createObjectURL(imageBlob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'buddy-health-card.png';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    alert('健康卡已保存！您可以手动分享到Messenger。');
+                }
+            } catch (error) {
+                console.error('分享失败:', error);
+                alert('分享失败，请稍后重试。');
+            }
+        }
+        
+        // Close overlay when clicking outside
+        document.getElementById('shareCardOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeShareCard();
+            }
+        });
+    </script>
 </body>
 </html> 
